@@ -1,5 +1,7 @@
 package com.example.weverson.speedchat.login.domain.model;
 
+import com.example.weverson.speedchat.signup.domain.model.User;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
