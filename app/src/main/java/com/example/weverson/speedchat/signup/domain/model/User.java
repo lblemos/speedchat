@@ -1,8 +1,8 @@
-package com.example.weverson.speedchat.login.domain.model;
+package com.example.weverson.speedchat.signup.domain.model;
 
 import android.support.annotation.NonNull;
 
-public class User implements Authenticable {
+public class User{
 
     @NonNull private String mNickname;
 
@@ -36,20 +36,12 @@ public class User implements Authenticable {
     }
 
     @NonNull
-    @Override
     public String getEmail() {
         return mEmail;
     }
 
     @NonNull
-    @Override
     public String getPassword() {
         return mPassword;
-    }
-
-    @Override
-    public boolean isAuthentic(Authenticable authenticable) {
-        return false;
-//        return (getEmail().equals(authenticable.getEmail())) && (getPassword().equals(authenticable.getPassword()));
     }
 }
