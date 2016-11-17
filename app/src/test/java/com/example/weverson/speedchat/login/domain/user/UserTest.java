@@ -1,6 +1,6 @@
-package com.example.weverson.speedchat.login.domain.model;
+package com.example.weverson.speedchat.login.domain.user;
 
-import com.example.weverson.speedchat.signup.domain.model.User;
+import com.example.weverson.speedchat.domain.user.User;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -45,7 +45,7 @@ public class UserTest {
     }
 
     @Test
-    public void createUserAuthenticable(){
+    public void createUserAuthenticate(){
         String nickname = "John";
         String email = "john@email.com";
         String password = "password";
@@ -57,7 +57,6 @@ public class UserTest {
         assertEquals(email, theUser.getEmail());
         assertEquals(password, theUser.getPassword());
     }
-
 
 
 }

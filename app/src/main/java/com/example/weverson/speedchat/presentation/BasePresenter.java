@@ -1,4 +1,4 @@
-package com.example.weverson.speedchat;
+package com.example.weverson.speedchat.presentation;
 
 public interface BasePresenter {
 

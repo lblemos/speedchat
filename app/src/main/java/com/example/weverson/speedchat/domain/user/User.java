@@ -1,4 +1,4 @@
-package com.example.weverson.speedchat.signup.domain.model;
+package com.example.weverson.speedchat.domain.user;
 
 import android.support.annotation.NonNull;
 

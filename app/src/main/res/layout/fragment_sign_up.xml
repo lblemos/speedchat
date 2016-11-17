@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     android:padding="@dimen/activity_vertical_margin"
-    tools:context="com.example.weverson.speedchat.signup.SignUpFragment">
+    tools:context=".presentation.signup.SignUpFragment">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                 android:textColor="@color/secondaryText"
                 android:text="@string/title_sign_up"
                 android:textAllCaps="true"
-                android:textSize="18dp">
+                android:textSize="18sp">
 
             </TextView>
 
@@ -79,6 +79,23 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/text_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/secondaryText"
+                android:layout_marginBottom="@dimen/large">
+
+                <EditText
+                    android:id="@+id/edit_confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/msg_confirm_password"
+                    android:textColor="@color/secondaryText"
+                    android:inputType="textPassword"/>
+
+            </android.support.design.widget.TextInputLayout>
+
 
             <Button
                 android:id="@+id/button_sign_up"
@@ -105,7 +122,7 @@
                     android:gravity="center"
                     android:text="@string/msg_already_a_member"
                     android:textColor="@color/secondaryText"
-                    android:textSize="16dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/text_login"
@@ -115,7 +132,7 @@
                     android:gravity="center"
                     android:text="@string/action_login"
                     android:textColor="@color/colorAccent"
-                    android:textSize="16dp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
