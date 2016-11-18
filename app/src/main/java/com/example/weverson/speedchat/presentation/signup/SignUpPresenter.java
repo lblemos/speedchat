@@ -3,19 +3,25 @@ package com.example.weverson.speedchat.presentation.signup;
 import android.support.annotation.NonNull;
 import android.util.Patterns;
 
+import com.example.weverson.speedchat.domain.user.User;
+import com.example.weverson.speedchat.domain.user.usercase.SignUpUseCase;
+
 import javax.inject.Inject;
 
-public class SignUpPresenter implements SignUpContract.Presenter{
+public class SignUpPresenter implements SignUpContract.Presenter {
 
     private SignUpContract.View mSignUpView;
 
+    private SignUpUseCase mSignUpUseCase;
+
     @Inject
-    public SignUpPresenter(SignUpContract.View view) {
+    public SignUpPresenter(SignUpContract.View view, SignUpUseCase signUpUseCase) {
         mSignUpView = view;
+        mSignUpUseCase = signUpUseCase;
     }
 
     @Inject
-    void setupListeners(){
+    public void setupListeners() {
         mSignUpView.setPresenter(this);
     }
 
@@ -28,28 +34,55 @@ public class SignUpPresenter implements SignUpContract.Presenter{
     public void createNewAccount(@NonNull String nickname, @NonNull String email,
                                  @NonNull String password, @NonNull String confirmPassword) {
 
-        if(nickname.isEmpty()){
+        if(isValidForm(nickname, email, password, confirmPassword)) {
+
+            User user = new User(nickname, email, password);
+            mSignUpUseCase.execute(new SignUpUseCase.RequestValues())
+                    .subscribe(this::createNewAccountSuccess);
+
+
+        }
+
+    }
+
+    public void createNewAccountSuccess(Object o){
+        mSignUpView.showConfirmationMessage("Account created with success!!!");
+    }
+
+    private boolean isValidForm(@NonNull String nickname, @NonNull String email,
+                                @NonNull String password, @NonNull String confirmPassword) {
+
+        boolean isValid = true;
+
+        if (nickname.isEmpty()) {
             mSignUpView.showNicknameErrorMessage("The name can not be empty");
+            isValid = false;
         }
 
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             mSignUpView.showEmailErrorMessage("The email can not be empty");
+            isValid = false;
         }
 
-        if(password.isEmpty()) {
+        if (password.isEmpty()) {
             mSignUpView.showPasswordErrorMessage("The password can not be empty");
+            isValid = false;
         }
 
-        if(Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             mSignUpView.showEmailErrorMessage("The email not valid");
+            isValid = false;
         }
 
-        if(confirmPassword.isEmpty()) {
+        if (confirmPassword.isEmpty()) {
             mSignUpView.showConfirmPasswordErrorMessage("The Confirm password can not be empty");
-        }else if(!password.equals(confirmPassword)){
+            isValid = false;
+        } else if (!password.equals(confirmPassword)) {
             mSignUpView.showConfirmPasswordErrorMessage("The passwords are not the same");
+            isValid = false;
         }
 
+        return isValid;
     }
 
 

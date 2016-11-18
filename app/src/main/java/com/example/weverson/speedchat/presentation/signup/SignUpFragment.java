@@ -2,6 +2,7 @@ package com.example.weverson.speedchat.presentation.signup;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,6 +66,11 @@ public class SignUpFragment extends Fragment implements SignUpContract.View  {
     @Override
     public void showConfirmPasswordErrorMessage(String error) {
         mEditConfirmPassword.setError(error);
+    }
+
+    @Override
+    public void showConfirmationMessage(String message) {
+        Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT).show();
     }
 
 

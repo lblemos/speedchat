@@ -24,6 +24,8 @@ public interface SignUpContract {
 
         void showConfirmPasswordErrorMessage(String error);
 
+        void showConfirmationMessage(String message);
+
     }
 
 }
