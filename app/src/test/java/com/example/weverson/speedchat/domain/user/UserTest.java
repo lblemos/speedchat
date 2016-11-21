@@ -1,12 +1,10 @@
-package com.example.weverson.speedchat.login.domain.user;
-
-import com.example.weverson.speedchat.domain.user.User;
+package com.example.weverson.speedchat.domain.user;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
 
 public class UserTest {
 

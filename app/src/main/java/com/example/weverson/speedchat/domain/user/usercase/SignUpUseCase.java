@@ -3,8 +3,6 @@ package com.example.weverson.speedchat.domain.user.usercase;
 import com.example.weverson.speedchat.data.firebase.authentication.FirebaseAuthentication;
 import com.example.weverson.speedchat.domain.Authenticable;
 import com.example.weverson.speedchat.domain.UseCase;
-import com.example.weverson.speedchat.domain.user.User;
-import com.google.firebase.auth.FirebaseAuth;
 
 import javax.inject.Inject;
 
@@ -26,6 +24,7 @@ public class SignUpUseCase extends UseCase<SignUpUseCase.RequestValues, Object> 
     protected Observable<Object> run(RequestValues requestValues) {
         return Observable.create(subscriber -> {
             mAuth.createNewUser(requestValues.getAuthenticable());
+            mAuth.updateProfile(requestValues.getAuthenticable());
             subscriber.onCompleted();
         });
     }

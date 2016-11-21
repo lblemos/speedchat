@@ -1,4 +1,4 @@
-package com.example.weverson.speedchat.scopes;
+package com.example.weverson.speedchat.presentation.scopes;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

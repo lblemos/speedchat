@@ -1,10 +1,8 @@
-package com.example.weverson.speedchat.login.presentation.signup;
+package com.example.weverson.speedchat.presentation.signup;
 
 import android.util.Patterns;
 
 import com.example.weverson.speedchat.domain.user.usercase.SignUpUseCase;
-import com.example.weverson.speedchat.presentation.signup.SignUpContract;
-import com.example.weverson.speedchat.presentation.signup.SignUpPresenter;
 
 import org.junit.Before;
 import org.junit.Test;

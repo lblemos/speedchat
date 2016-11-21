@@ -16,6 +16,7 @@ public class MainModule {
         mContext = context;
     }
 
+    @Singleton
     @Provides
     Context providerContext(){
         return mContext;

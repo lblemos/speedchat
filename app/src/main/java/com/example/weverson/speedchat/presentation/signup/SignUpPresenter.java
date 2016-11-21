@@ -38,12 +38,12 @@ public class SignUpPresenter implements SignUpContract.Presenter {
 
             User user = new User(nickname, email, password);
             mSignUpUseCase.execute(new SignUpUseCase.RequestValues(user))
-                    .doOnCompleted(this::createNewAccountSuccess);
+                    .subscribe(v -> {}, v -> {}, this::createNewAccountCompleted);
         }
 
     }
 
-    private void createNewAccountSuccess() {
+    private void createNewAccountCompleted() {
         mSignUpView.showConfirmationMessage("Account created with success!!!");
     }
 

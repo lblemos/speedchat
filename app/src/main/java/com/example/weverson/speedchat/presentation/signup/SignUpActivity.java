@@ -33,14 +33,14 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void initializeDagger() {
         DaggerSignUpComponent.builder()
-                .firebaseComponent(((MainApplication) getApplication()).getFirebaseComponent())
+                .mainComponent(((MainApplication) getApplication()).getMainComponent())
                 .signUpModule(new SignUpModule(mSignUpFragment)).build()
                 .inject(this);
 
     }
 
     private void initializeFragment() {
-        if (mFrameContent == null) {
+        if (mFrameContent != null) {
             mSignUpFragment = new SignUpFragment();
             getSupportFragmentManager()
                     .beginTransaction()
