@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:padding="@dimen/activity_vertical_margin"
+    android:background="@color/primary_color_dark"
+    android:padding="@dimen/vertical"
     tools:context=".presentation.signup.SignUpFragment">
 
     <android.support.v4.widget.NestedScrollView
@@ -16,16 +16,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_marginTop="@dimen/small"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="@dimen/vertical"
+                android:layout_marginTop="@dimen/small"
                 android:gravity="center"
-                android:textColor="@color/secondaryText"
                 android:text="@string/title_sign_up"
-                android:textAllCaps="true"
-                android:textSize="18sp">
+                style="@style/text_title_white">
 
             </TextView>
 
@@ -33,15 +31,15 @@
                 android:id="@+id/text_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/secondaryText"
-                android:layout_marginBottom="@dimen/large">
+                android:layout_marginBottom="@dimen/large"
+                android:textColorHint="@color/text_secondary">
 
                 <EditText
                     android:id="@+id/edit_nickname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/secondaryText"
-                    android:hint="@string/msg_nickname" />
+                    android:hint="@string/msg_nickname"
+                    android:textColor="@color/text_secondary" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -50,15 +48,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/large"
-                android:textColorHint="@color/secondaryText">
+                android:textColorHint="@color/text_secondary">
 
                 <EditText
                     android:id="@+id/edit_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/secondaryText"
+                    android:hint="@string/msg_email"
                     android:inputType="textEmailAddress"
-                    android:hint="@string/msg_email" />
+                    android:textColor="@color/text_secondary" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -66,16 +64,16 @@
                 android:id="@+id/text_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/secondaryText"
-                android:layout_marginBottom="@dimen/large">
+                android:layout_marginBottom="@dimen/large"
+                android:textColorHint="@color/text_secondary">
 
                 <EditText
                     android:id="@+id/edit_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/msg_password"
-                    android:textColor="@color/secondaryText"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:textColor="@color/text_secondary" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -83,29 +81,28 @@
                 android:id="@+id/text_confirm_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/secondaryText"
-                android:layout_marginBottom="@dimen/large">
+                android:layout_marginBottom="@dimen/large"
+                android:textColorHint="@color/text_secondary">
 
                 <EditText
                     android:id="@+id/edit_confirm_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/msg_confirm_password"
-                    android:textColor="@color/secondaryText"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:textColor="@color/text_secondary" />
 
             </android.support.design.widget.TextInputLayout>
 
 
             <Button
                 android:id="@+id/button_sign_up"
-                android:layout_marginTop="@dimen/large"
-                style="@style/Widget.AppCompat.Button.Colored"
+                style="@style/button_colored"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="@string/action_sign_up"
-                android:textColor="@color/primaryText" />
+                android:layout_marginTop="@dimen/large"
+                android:text="@string/action_sign_up" />
 
 
             <LinearLayout
@@ -116,23 +113,20 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/text_white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/large"
                     android:gravity="center"
-                    android:text="@string/msg_already_a_member"
-                    android:textColor="@color/secondaryText"
-                    android:textSize="16sp" />
+                    android:text="@string/msg_already_a_member" />
 
                 <TextView
                     android:id="@+id/text_login"
+                    style="@style/link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
                     android:gravity="center"
-                    android:text="@string/action_login"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="16sp" />
+                    android:text="@string/action_login" />
 
             </LinearLayout>
 
