@@ -37,15 +37,13 @@ public class SignUpPresenter implements SignUpContract.Presenter {
         if(isValidForm(nickname, email, password, confirmPassword)) {
 
             User user = new User(nickname, email, password);
-            mSignUpUseCase.execute(new SignUpUseCase.RequestValues())
-                    .subscribe(this::createNewAccountSuccess);
-
-
+            mSignUpUseCase.execute(new SignUpUseCase.RequestValues(user))
+                    .doOnCompleted(this::createNewAccountSuccess);
         }
 
     }
 
-    public void createNewAccountSuccess(Object o){
+    private void createNewAccountSuccess() {
         mSignUpView.showConfirmationMessage("Account created with success!!!");
     }
 

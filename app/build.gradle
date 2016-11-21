@@ -44,6 +44,9 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
 
+    compile 'com.google.firebase:firebase-core:9.6.1'
+    compile 'com.google.firebase:firebase-auth:9.6.1'
+
     testCompile 'junit:junit:4.12'
     testCompile "org.mockito:mockito-core:1.8"
     testCompile "org.powermock:powermock-module-junit4:1.6.4"
@@ -51,5 +54,6 @@ dependencies {
     testCompile "org.powermock:powermock-api-mockito:1.6.4"
     testCompile "org.powermock:powermock-classloading-xstream:1.6.4"
 
-
 }
+
+apply plugin: 'com.google.gms.google-services'

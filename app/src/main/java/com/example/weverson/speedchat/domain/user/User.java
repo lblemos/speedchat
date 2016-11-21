@@ -2,7 +2,9 @@ package com.example.weverson.speedchat.domain.user;
 
 import android.support.annotation.NonNull;
 
-public class User{
+import com.example.weverson.speedchat.domain.Authenticable;
+
+public class User implements Authenticable{
 
     @NonNull private String mNickname;
 
@@ -35,13 +37,17 @@ public class User{
         return this;
     }
 
+    @Override
     @NonNull
     public String getEmail() {
         return mEmail;
     }
 
+    @Override
     @NonNull
     public String getPassword() {
         return mPassword;
     }
+
+
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 
+import com.example.weverson.speedchat.MainApplication;
 import com.example.weverson.speedchat.R;
 
 import javax.inject.Inject;
@@ -31,17 +32,19 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void initializeDagger() {
-
         DaggerSignUpComponent.builder()
-                .signUpModule(new SignUpModule(mSignUpFragment))
-                .build().inject(this);
+                .firebaseComponent(((MainApplication) getApplication()).getFirebaseComponent())
+                .signUpModule(new SignUpModule(mSignUpFragment)).build()
+                .inject(this);
 
     }
 
     private void initializeFragment() {
-        mSignUpFragment = new SignUpFragment();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.frame_content, mSignUpFragment).commit();
+        if (mFrameContent == null) {
+            mSignUpFragment = new SignUpFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.frame_content, mSignUpFragment).commit();
+        }
     }
 }
