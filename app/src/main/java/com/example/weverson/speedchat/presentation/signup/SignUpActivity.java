@@ -15,9 +15,11 @@ import butterknife.ButterKnife;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    @BindView(R.id.frame_content) FrameLayout mFrameContent;
+    @BindView(R.id.frame_content)
+    FrameLayout mFrameContent;
 
-    @Inject SignUpPresenter mSignUpPresenter;
+    @Inject
+    SignUpPresenter mSignUpPresenter;
 
     private SignUpFragment mSignUpFragment;
 
@@ -47,4 +49,6 @@ public class SignUpActivity extends AppCompatActivity {
                     .add(R.id.frame_content, mSignUpFragment).commit();
         }
     }
+
+
 }

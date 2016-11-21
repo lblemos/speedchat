@@ -11,19 +11,21 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/linear_sign_up"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/text_sign_up"
+                style="@style/text_title_white"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/vertical"
                 android:layout_marginTop="@dimen/small"
                 android:gravity="center"
-                android:text="@string/title_sign_up"
-                style="@style/text_title_white">
+                android:text="@string/title_sign_up">
 
             </TextView>
 
@@ -38,6 +40,7 @@
                     android:id="@+id/edit_nickname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="false"
                     android:hint="@string/msg_nickname"
                     android:textColor="@color/text_secondary" />
 
@@ -54,6 +57,7 @@
                     android:id="@+id/edit_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="false"
                     android:hint="@string/msg_email"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/text_secondary" />
@@ -71,6 +75,7 @@
                     android:id="@+id/edit_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="false"
                     android:hint="@string/msg_password"
                     android:inputType="textPassword"
                     android:textColor="@color/text_secondary" />
@@ -88,6 +93,7 @@
                     android:id="@+id/edit_confirm_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="false"
                     android:hint="@string/msg_confirm_password"
                     android:inputType="textPassword"
                     android:textColor="@color/text_secondary" />
@@ -102,6 +108,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginTop="@dimen/large"
+                android:scaleX="0"
+                android:scaleY="0"
                 android:text="@string/action_sign_up" />
 
 
@@ -110,6 +118,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:gravity="center"
+                android:scaleX="0"
+                android:scaleY="0"
                 android:orientation="horizontal">
 
                 <TextView
