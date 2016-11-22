@@ -31,7 +31,7 @@ public class SignUpUseCase extends UseCase<SignUpUseCase.RequestValues, Object> 
                 @Override
                 public void onCompleted() {
                     mAuth.updateProfile(requestValues.getAuthenticable())
-                            .subscribe(v -> {}, throwable -> subscriber.onError(new AuthenticationException(e.getMessage())),
+                            .subscribe(v -> {}, e -> subscriber.onError(new AuthenticationException(e.getMessage())),
                                     () -> subscriber.onCompleted());
                 }
 
