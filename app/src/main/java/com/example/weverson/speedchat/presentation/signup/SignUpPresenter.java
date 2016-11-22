@@ -38,9 +38,13 @@ public class SignUpPresenter implements SignUpContract.Presenter {
 
             User user = new User(nickname, email, password);
             mSignUpUseCase.execute(new SignUpUseCase.RequestValues(user))
-                    .subscribe(v -> {}, v -> {}, this::createNewAccountCompleted);
+                    .subscribe(v -> {}, this::createNewAccountFail, this::createNewAccountCompleted);
         }
 
+    }
+
+    private void createNewAccountFail(Throwable throwable) {
+        mSignUpView.showFailMessage(throwable.getMessage());
     }
 
     private void createNewAccountCompleted() {

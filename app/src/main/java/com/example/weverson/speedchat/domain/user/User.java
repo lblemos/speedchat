@@ -43,6 +43,11 @@ public class User implements Authenticable{
         return this;
     }
 
+    public User setEmail(@NonNull String email) {
+        mEmail = email;
+        return this;
+    }
+
     @Override
     @NonNull
     public String getEmail() {

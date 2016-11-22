@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.weverson.speedchat.R;
 
@@ -80,7 +81,12 @@ public class SignUpFragment extends Fragment implements SignUpContract.View  {
 
     @Override
     public void showConfirmationMessage(String message) {
-        Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showFailMessage(String message) {
+        Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
     }
 
 
@@ -106,33 +112,12 @@ public class SignUpFragment extends Fragment implements SignUpContract.View  {
 
         ViewGroup container = mLinearSignUp;
 
-        ViewCompat.animate(mTextSignUp)
-                .translationY(200)
-                .setStartDelay(STARTUP_DELAY)
-                .setDuration(ANIM_ITEM_DURATION)
-                .setInterpolator(new DecelerateInterpolator(1.2f))
-                .start();
-
-
         for (int i = 0; i < container.getChildCount(); i++) {
             View v = container.getChildAt(i);
-            ViewPropertyAnimatorCompat viewAnimator;
-
-            if (!(v instanceof Button || v instanceof LinearLayout)) {
-                viewAnimator = ViewCompat.animate(v)
-                        .translationY(70).alpha(1)
-                        .scaleY(1).scaleX(1)
-                        .setStartDelay((100 * i) + 500)
-                        .setDuration(ITEM_DELAY);
-
-            } else {
-                viewAnimator = ViewCompat.animate(v)
-                        .translationY(70).alpha(1)
-                        .scaleY(1).scaleX(1)
-                        .setStartDelay((100 * i) + 500)
-                        .setDuration(ITEM_DELAY);
-
-            }
+            ViewPropertyAnimatorCompat viewAnimator = ViewCompat.animate(v)
+                    .scaleY(1).scaleX(1)
+                    .setStartDelay((100 * i) + 500)
+                    .setDuration(ITEM_DELAY);
 
             viewAnimator.setInterpolator(new DecelerateInterpolator()).start();
 

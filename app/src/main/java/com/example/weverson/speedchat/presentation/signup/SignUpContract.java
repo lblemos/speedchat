@@ -26,6 +26,8 @@ public interface SignUpContract {
 
         void showConfirmationMessage(String message);
 
+        void showFailMessage(String message);
+
     }
 
 }
