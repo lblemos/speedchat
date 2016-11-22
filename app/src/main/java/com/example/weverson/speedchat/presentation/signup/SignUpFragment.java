@@ -1,5 +1,6 @@
 package com.example.weverson.speedchat.presentation.signup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -14,9 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.weverson.speedchat.R;
+import com.example.weverson.speedchat.presentation.signin.SignInActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,11 +35,7 @@ public class SignUpFragment extends Fragment implements SignUpContract.View  {
     @BindView(R.id.edit_password) EditText mEditPassword;
     @BindView(R.id.edit_confirm_password) EditText mEditConfirmPassword;
     @BindView(R.id.button_sign_up) Button mButtonSignUp;
-    @BindView(R.id.text_login) TextView mTextLogin;
-
-    public static final int STARTUP_DELAY = 300;
-    public static final int ANIM_ITEM_DURATION = 1000;
-    public static final int ITEM_DELAY = 300;
+    @BindView(R.id.text_sign_in) TextView mTextSignIn;
 
 
     private SignUpContract.Presenter mSignUpPresenter;
@@ -103,12 +100,14 @@ public class SignUpFragment extends Fragment implements SignUpContract.View  {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         showAnimateForm();
     }
 
     private void showAnimateForm() {
+
+        final int itemDelay = 300;
 
         ViewGroup container = mLinearSignUp;
 
@@ -117,11 +116,17 @@ public class SignUpFragment extends Fragment implements SignUpContract.View  {
             ViewPropertyAnimatorCompat viewAnimator = ViewCompat.animate(v)
                     .scaleY(1).scaleX(1)
                     .setStartDelay((100 * i) + 500)
-                    .setDuration(ITEM_DELAY);
+                    .setDuration(itemDelay);
 
             viewAnimator.setInterpolator(new DecelerateInterpolator()).start();
 
         }
+    }
+
+    @OnClick(R.id.text_sign_in)
+    public void openSignIn(){
+        Intent it = new Intent(getContext(), SignInActivity.class);
+        startActivity(it);
     }
 
 }
