@@ -16,15 +16,19 @@ public interface SignUpContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showNicknameErrorMessage(String error);
+        void showNicknameErrorMessage();
 
-        void showEmailErrorMessage(String error);
+        void showEmailErrorMessage();
 
-        void showPasswordErrorMessage(String error);
+        void showEmailNotValidErrorMessage();
 
-        void showConfirmPasswordErrorMessage(String error);
+        void showPasswordsNotSameErrorMessage();
 
-        void showConfirmationMessage(String message);
+        void showPasswordErrorMessage();
+
+        void showConfirmPasswordErrorMessage();
+
+        void showConfirmationMessage();
 
         void showFailMessage(String message);
 

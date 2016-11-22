@@ -1,5 +1,6 @@
 package com.example.weverson.speedchat.presentation.signup;
 
+import android.content.Context;
 import android.util.Patterns;
 
 import com.example.weverson.speedchat.domain.user.usercase.SignUpUseCase;
@@ -30,6 +31,7 @@ public class SignUpPresenterTest {
 
     @Mock private SignUpContract.View mSignUpView;
     @Mock private SignUpUseCase mSignUpUseCase;
+    @Mock private Context mContext;
 
     private SignUpPresenter mSignUpPresenter;
 
@@ -40,7 +42,7 @@ public class SignUpPresenterTest {
         mockStatic(Matcher.class);
         mockStatic(Pattern.class);
 
-        mSignUpPresenter = new SignUpPresenter(mSignUpView, mSignUpUseCase);
+        mSignUpPresenter = new SignUpPresenter(mSignUpView, mSignUpUseCase, mContext);
         mSignUpPresenter.setupListeners();
 
         PowerMockito.when(Patterns.EMAIL_ADDRESS.matcher(any(String.class)).matches()).thenReturn(true);
@@ -49,13 +51,13 @@ public class SignUpPresenterTest {
     @Test
     public void createNewAccount_emptyNicknameShowErrorUi(){
         mSignUpPresenter.createNewAccount("", "john@gmail.com", "123123", "123123");
-        verify(mSignUpView).showNicknameErrorMessage(anyString());
+        verify(mSignUpView).showNicknameErrorMessage();
     }
 
     @Test
     public void createNewAccount_emptyEmailShowErrorUi(){
         mSignUpPresenter.createNewAccount("john", "", "123123", "123123");
-        verify(mSignUpView).showEmailErrorMessage(anyString());
+        verify(mSignUpView).showEmailErrorMessage();
     }
 
     @Test
@@ -63,36 +65,47 @@ public class SignUpPresenterTest {
         PowerMockito.when(Patterns.EMAIL_ADDRESS.matcher(anyString()).matches()).thenReturn(false);
 
         mSignUpPresenter.createNewAccount("john", "emailNotValid", "123123", "123123");
-        verify(mSignUpView).showEmailErrorMessage(anyString());
+        verify(mSignUpView).showEmailErrorMessage();
     }
 
     @Test
     public void createNewAccount_emptyPasswordShowErrorUi(){
         mSignUpPresenter.createNewAccount("john", "john@gmail.com", "", "123123");
-        verify(mSignUpView).showPasswordErrorMessage(anyString());
+        verify(mSignUpView).showPasswordErrorMessage();
     }
 
     @Test
     public void createNewAccount_emptyConfirmPasswordShowErrorUi(){
         mSignUpPresenter.createNewAccount("john", "john@gmail.com", "123123", "");
-        verify(mSignUpView).showConfirmPasswordErrorMessage(anyString());
+        verify(mSignUpView).showConfirmPasswordErrorMessage();
     }
 
     @Test
     public void createNewAccount_passwordDivergentConfirmPasswordShowErrorUi(){
         mSignUpPresenter.createNewAccount("john", "john@gmail.com", "123123", "12312");
-        verify(mSignUpView).showConfirmPasswordErrorMessage(anyString());
+        verify(mSignUpView).showConfirmPasswordErrorMessage();
     }
 
     @Test
     public void createNewAccount_showMessageInUi(){
         Mockito.when(mSignUpUseCase.execute(any(SignUpUseCase.RequestValues.class)))
-                .thenReturn(Observable.just(new Object()));
+                .thenReturn(Observable.<Void>just(null));
 
         mSignUpPresenter.createNewAccount("john", "john@gmail.com", "123123", "123123");
 
         verify(mSignUpUseCase).execute(any(SignUpUseCase.RequestValues.class));
-        verify(mSignUpView).showConfirmationMessage(anyString());
+        verify(mSignUpView).showConfirmationMessage();
+    }
+
+    @Test
+    public void createNewAccount_showMessageFailInUi(){
+        Mockito.when(mSignUpUseCase.execute(any(SignUpUseCase.RequestValues.class)))
+                .thenReturn(Observable.error(new Exception()));
+
+        mSignUpPresenter.createNewAccount("john", "john@gmail.com", "1234", "1234");
+
+        verify(mSignUpUseCase).execute(any(SignUpUseCase.RequestValues.class));
+        verify(mSignUpView).showFailMessage(anyString());
     }
 
 }

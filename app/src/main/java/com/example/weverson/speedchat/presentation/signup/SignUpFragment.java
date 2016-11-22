@@ -26,16 +26,31 @@ import butterknife.OnClick;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 
-public class SignUpFragment extends Fragment implements SignUpContract.View  {
+public class SignUpFragment extends Fragment implements SignUpContract.View {
 
-    @BindView(R.id.linear_sign_up) LinearLayout mLinearSignUp;
-    @BindView(R.id.text_sign_up) TextView mTextSignUp;
-    @BindView(R.id.edit_nickname)  EditText mEditNickname;
-    @BindView(R.id.edit_email) EditText mEditEmail;
-    @BindView(R.id.edit_password) EditText mEditPassword;
-    @BindView(R.id.edit_confirm_password) EditText mEditConfirmPassword;
-    @BindView(R.id.button_sign_up) Button mButtonSignUp;
-    @BindView(R.id.text_sign_in) TextView mTextSignIn;
+    @BindView(R.id.linear_sign_up)
+    LinearLayout mLinearSignUp;
+
+    @BindView(R.id.text_sign_up)
+    TextView mTextSignUp;
+
+    @BindView(R.id.edit_nickname)
+    EditText mEditNickname;
+
+    @BindView(R.id.edit_email)
+    EditText mEditEmail;
+
+    @BindView(R.id.edit_password)
+    EditText mEditPassword;
+
+    @BindView(R.id.edit_confirm_password)
+    EditText mEditConfirmPassword;
+
+    @BindView(R.id.button_sign_up)
+    Button mButtonSignUp;
+
+    @BindView(R.id.text_sign_in)
+    TextView mTextSignIn;
 
 
     private SignUpContract.Presenter mSignUpPresenter;
@@ -57,27 +72,39 @@ public class SignUpFragment extends Fragment implements SignUpContract.View  {
     }
 
     @Override
-    public void showNicknameErrorMessage(String error) {
-        mEditNickname.setError(error);
+    public void showNicknameErrorMessage() {
+
+        mEditNickname.setError(getContext().getString(R.string.msg_name_empty));
     }
 
     @Override
-    public void showEmailErrorMessage(String error) {
-        mEditEmail.setError(error);
+    public void showEmailErrorMessage() {
+        mEditEmail.setError(getContext().getString(R.string.msg_email_empty));
     }
 
     @Override
-    public void showPasswordErrorMessage(String error) {
-        mEditPassword.setError(error);
+    public void showEmailNotValidErrorMessage() {
+        mEditEmail.setError(getContext().getString(R.string.msg_email_invalid));
     }
 
     @Override
-    public void showConfirmPasswordErrorMessage(String error) {
-        mEditConfirmPassword.setError(error);
+    public void showPasswordErrorMessage() {
+        mEditPassword.setError(getContext().getString(R.string.msg_password_empty));
     }
 
     @Override
-    public void showConfirmationMessage(String message) {
+    public void showConfirmPasswordErrorMessage() {
+        mEditConfirmPassword.setError(getContext().getString(R.string.msg_confirm_password_empty));
+    }
+
+    @Override
+    public void showPasswordsNotSameErrorMessage() {
+        mEditConfirmPassword.setError(getContext().getString(R.string.msg_passwords_same));
+    }
+
+    @Override
+    public void showConfirmationMessage() {
+        String message = getContext().getString(R.string.msg_create_account_success);
         Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
     }
 
@@ -88,7 +115,7 @@ public class SignUpFragment extends Fragment implements SignUpContract.View  {
 
 
     @OnClick(R.id.button_sign_up)
-    public void signUp(View view){
+    public void signUp(View view) {
 
         String nickname = mEditNickname.getText().toString().trim();
         String email = mEditEmail.getText().toString().trim();
@@ -124,7 +151,7 @@ public class SignUpFragment extends Fragment implements SignUpContract.View  {
     }
 
     @OnClick(R.id.text_sign_in)
-    public void openSignIn(){
+    public void openSignIn() {
         Intent it = new Intent(getContext(), SignInActivity.class);
         startActivity(it);
     }

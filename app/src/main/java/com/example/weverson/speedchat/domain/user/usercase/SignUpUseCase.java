@@ -4,18 +4,16 @@ import com.example.weverson.speedchat.data.AuthenticationException;
 import com.example.weverson.speedchat.data.firebase.authentication.FirebaseAuthentication;
 import com.example.weverson.speedchat.domain.Authenticable;
 import com.example.weverson.speedchat.domain.UseCase;
-import com.example.weverson.speedchat.domain.user.User;
 
 import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Subscriber;
-import rx.functions.Action0;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 
-public class SignUpUseCase extends UseCase<SignUpUseCase.RequestValues, Object> {
+public class SignUpUseCase extends UseCase<SignUpUseCase.RequestValues, Void> {
 
     private FirebaseAuthentication mAuth;
 
@@ -25,14 +23,13 @@ public class SignUpUseCase extends UseCase<SignUpUseCase.RequestValues, Object> 
     }
 
     @Override
-    protected Observable<Object> run(RequestValues requestValues) {
+    protected Observable<Void> run(RequestValues requestValues) {
         return Observable.create(subscriber -> {
             mAuth.createNewUser(requestValues.getAuthenticable()).subscribe(new Subscriber<Void>() {
                 @Override
                 public void onCompleted() {
                     mAuth.updateProfile(requestValues.getAuthenticable())
-                            .subscribe(v -> {}, e -> subscriber.onError(new AuthenticationException(e.getMessage())),
-                                    () -> subscriber.onCompleted());
+                            .subscribe(v -> {}, e -> subscriber.onError(new AuthenticationException(e.getMessage())), () -> subscriber.onCompleted());
                 }
 
                 @Override

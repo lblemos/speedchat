@@ -1,10 +1,12 @@
 package com.example.weverson.speedchat.domain;
 
 import rx.Observable;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public abstract class UseCase<R extends UseCase.RequestValues, T> {
+
 
     public Observable<T> execute(R requestValues){
         return run(requestValues)
