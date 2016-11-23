@@ -9,24 +9,12 @@ public interface SignUpContract {
 
     interface Presenter extends BasePresenter {
 
-        void createNewAccount(@NonNull String nickname, @NonNull String email,
-                              @NonNull String password, @NonNull String confirmPassword);
+        void createNewAccount(@NonNull String email,
+                              @NonNull String password);
 
     }
 
     interface View extends BaseView<Presenter> {
-
-        void showNicknameErrorMessage();
-
-        void showEmailErrorMessage();
-
-        void showEmailNotValidErrorMessage();
-
-        void showPasswordsNotSameErrorMessage();
-
-        void showPasswordErrorMessage();
-
-        void showConfirmPasswordErrorMessage();
 
         void showConfirmationMessage();
 

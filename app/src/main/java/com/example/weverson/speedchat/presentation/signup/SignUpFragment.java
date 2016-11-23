@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,37 +73,6 @@ public class SignUpFragment extends Fragment implements SignUpContract.View {
     }
 
     @Override
-    public void showNicknameErrorMessage() {
-
-        mEditNickname.setError(getContext().getString(R.string.msg_name_empty));
-    }
-
-    @Override
-    public void showEmailErrorMessage() {
-        mEditEmail.setError(getContext().getString(R.string.msg_email_empty));
-    }
-
-    @Override
-    public void showEmailNotValidErrorMessage() {
-        mEditEmail.setError(getContext().getString(R.string.msg_email_invalid));
-    }
-
-    @Override
-    public void showPasswordErrorMessage() {
-        mEditPassword.setError(getContext().getString(R.string.msg_password_empty));
-    }
-
-    @Override
-    public void showConfirmPasswordErrorMessage() {
-        mEditConfirmPassword.setError(getContext().getString(R.string.msg_confirm_password_empty));
-    }
-
-    @Override
-    public void showPasswordsNotSameErrorMessage() {
-        mEditConfirmPassword.setError(getContext().getString(R.string.msg_passwords_same));
-    }
-
-    @Override
     public void showConfirmationMessage() {
         String message = getContext().getString(R.string.msg_create_account_success);
         Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
@@ -117,19 +87,48 @@ public class SignUpFragment extends Fragment implements SignUpContract.View {
     @OnClick(R.id.button_sign_up)
     public void signUp(View view) {
 
-        String nickname = mEditNickname.getText().toString().trim();
-        String email = mEditEmail.getText().toString().trim();
-        String password = mEditPassword.getText().toString().trim();
-        String confirmPassword = mEditConfirmPassword.getText().toString().trim();
+        String email = getEmail();
+        String password = getPassword();
 
-        mSignUpPresenter.createNewAccount(nickname, email, password, confirmPassword);
+        if(chackForm()) {
+            mSignUpPresenter.createNewAccount(email, password);
+        }
+
 
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        showAnimateForm();
+    protected boolean chackForm(){
+
+        final String email = getEmail();
+        final String password = getPassword();
+        final String confirmPassword = getConfirmPassword();
+
+        if (email.isEmpty()) {
+            mEditEmail.setError(getContext().getString(R.string.msg_email_empty));
+            return false;
+        }
+
+        if (password.isEmpty()) {
+            mEditPassword.setError(getContext().getString(R.string.msg_password_empty));
+            return false;
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            mEditEmail.setError(getContext().getString(R.string.msg_email_invalid));
+            return false;
+        }
+
+        if (confirmPassword.isEmpty()) {
+            mEditConfirmPassword.setError(getContext().getString(R.string.msg_confirm_password_empty));
+            return false;
+
+        } else if (!password.equals(confirmPassword)) {
+            mEditConfirmPassword.setError(getContext().getString(R.string.msg_passwords_same));
+            return false;
+        }
+
+        return true;
+
     }
 
     private void showAnimateForm() {
@@ -154,6 +153,25 @@ public class SignUpFragment extends Fragment implements SignUpContract.View {
     public void openSignIn() {
         Intent it = new Intent(getContext(), SignInActivity.class);
         startActivity(it);
+    }
+
+
+    protected String getEmail(){
+        return mEditEmail.getText().toString().trim();
+    }
+
+    protected String getPassword(){
+        return mEditPassword.getText().toString().trim();
+    }
+
+    protected String getConfirmPassword(){
+        return mEditConfirmPassword.getText().toString().trim();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        showAnimateForm();
     }
 
 }
