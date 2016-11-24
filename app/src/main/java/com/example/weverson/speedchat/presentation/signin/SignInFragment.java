@@ -2,6 +2,7 @@ package com.example.weverson.speedchat.presentation.signin;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +18,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.example.weverson.speedchat.presentation.utils.Animations.animateForm;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 
-public class SignInFragment extends Fragment {
+public class SignInFragment extends Fragment implements SignInContract.View {
 
     @BindView(R.id.text_sign_in)
     TextView textLogin;
@@ -27,6 +29,7 @@ public class SignInFragment extends Fragment {
     @BindView(R.id.linear_sign_in)
     LinearLayout mLinearSignIn;
 
+    private SignInContract.Presenter mSignInPresenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,5 +49,10 @@ public class SignInFragment extends Fragment {
     public void onStart() {
         super.onStart();
         animateForm(mLinearSignIn);
+    }
+
+    @Override
+    public void setPresenter(@NonNull SignInContract.Presenter presenter) {
+        mSignInPresenter = checkNotNull(presenter, "the presenter can not be null");
     }
 }

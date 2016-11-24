@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 
+import com.example.weverson.speedchat.MainApplication;
 import com.example.weverson.speedchat.R;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,6 +19,9 @@ public class SignInActivity extends AppCompatActivity {
 
     private SignInFragment mSignInFragment;
 
+    @Inject
+    SignInPresenter mPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +29,7 @@ public class SignInActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         initializeFragment();
-
+        initializerDagger();
     }
 
     private void initializeFragment() {
@@ -34,5 +40,12 @@ public class SignInActivity extends AppCompatActivity {
                     .add(R.id.frame_sign_in, mSignInFragment)
                     .commit();
         }
+    }
+
+    private void initializerDagger() {
+        DaggerSignInComponent.builder()
+                .mainComponent(((MainApplication) getApplication()).getMainComponent())
+                .signInModule(new SignInModule(mSignInFragment)).build()
+                .inject(this);
     }
 }
