@@ -5,13 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorCompat;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -24,6 +20,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.weverson.speedchat.presentation.utils.Animations.animateForm;
+import static com.example.weverson.speedchat.presentation.utils.FormValidation.checkEmailValid;
+import static com.example.weverson.speedchat.presentation.utils.FormValidation.checkInputEmpty;
+import static com.example.weverson.speedchat.presentation.utils.FormValidation.checkInputEquals;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 
@@ -34,9 +34,6 @@ public class SignUpFragment extends Fragment implements SignUpContract.View {
 
     @BindView(R.id.text_sign_up)
     TextView mTextSignUp;
-
-    @BindView(R.id.edit_nickname)
-    EditText mEditNickname;
 
     @BindView(R.id.edit_email)
     EditText mEditEmail;
@@ -72,81 +69,18 @@ public class SignUpFragment extends Fragment implements SignUpContract.View {
         mSignUpPresenter = checkNotNull(presenter);
     }
 
-    @Override
-    public void showConfirmationMessage() {
-        String message = getContext().getString(R.string.msg_create_account_success);
-        Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void showFailMessage(String message) {
-        Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
-    }
-
 
     @OnClick(R.id.button_sign_up)
-    public void signUp(View view) {
+    public void signUp() {
 
         String email = getEmail();
         String password = getPassword();
 
-        if(chackForm()) {
+        if(checkForm()) {
             mSignUpPresenter.createNewAccount(email, password);
         }
 
 
-    }
-
-    protected boolean chackForm(){
-
-        final String email = getEmail();
-        final String password = getPassword();
-        final String confirmPassword = getConfirmPassword();
-
-        if (email.isEmpty()) {
-            mEditEmail.setError(getContext().getString(R.string.msg_email_empty));
-            return false;
-        }
-
-        if (password.isEmpty()) {
-            mEditPassword.setError(getContext().getString(R.string.msg_password_empty));
-            return false;
-        }
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            mEditEmail.setError(getContext().getString(R.string.msg_email_invalid));
-            return false;
-        }
-
-        if (confirmPassword.isEmpty()) {
-            mEditConfirmPassword.setError(getContext().getString(R.string.msg_confirm_password_empty));
-            return false;
-
-        } else if (!password.equals(confirmPassword)) {
-            mEditConfirmPassword.setError(getContext().getString(R.string.msg_passwords_same));
-            return false;
-        }
-
-        return true;
-
-    }
-
-    private void showAnimateForm() {
-
-        final int itemDelay = 300;
-
-        ViewGroup container = mLinearSignUp;
-
-        for (int i = 0; i < container.getChildCount(); i++) {
-            View v = container.getChildAt(i);
-            ViewPropertyAnimatorCompat viewAnimator = ViewCompat.animate(v)
-                    .scaleY(1).scaleX(1)
-                    .setStartDelay((100 * i) + 500)
-                    .setDuration(itemDelay);
-
-            viewAnimator.setInterpolator(new DecelerateInterpolator()).start();
-
-        }
     }
 
     @OnClick(R.id.text_sign_in)
@@ -155,6 +89,46 @@ public class SignUpFragment extends Fragment implements SignUpContract.View {
         startActivity(it);
     }
 
+    protected boolean checkForm(){
+
+        final String email = getEmail();
+        final String password = getPassword();
+        final String confirmPassword = getConfirmPassword();
+        boolean isValid = true;
+
+        if (checkInputEmpty(email)) {
+            mEditEmail.setError(getContext().getString(R.string.msg_email_empty));
+            isValid = false;
+        }
+
+        if (checkInputEmpty(password)) {
+            mEditPassword.setError(getContext().getString(R.string.msg_password_empty));
+            isValid = false;
+        }
+
+        if (checkEmailValid(email)) {
+            mEditEmail.setError(getContext().getString(R.string.msg_email_invalid));
+            isValid = false;
+        }
+
+        if (checkInputEmpty(confirmPassword)) {
+            mEditConfirmPassword.setError(getContext().getString(R.string.msg_confirm_password_empty));
+            isValid = false;
+
+        } else if (!checkInputEquals(password, confirmPassword)) {
+            mEditConfirmPassword.setError(getContext().getString(R.string.msg_passwords_same));
+            isValid = false;
+        }
+
+        return isValid;
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        animateForm(mLinearSignUp);
+    }
 
     protected String getEmail(){
         return mEditEmail.getText().toString().trim();
@@ -169,9 +143,14 @@ public class SignUpFragment extends Fragment implements SignUpContract.View {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        showAnimateForm();
+    public void showConfirmationMessage() {
+        String message = getContext().getString(R.string.msg_create_account_success);
+        Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showFailMessage(String message) {
+        Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
     }
 
 }

@@ -34,25 +34,6 @@
             </TextView>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/text_nickname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/large"
-                android:scaleX="0"
-                android:scaleY="0"
-                android:textColorHint="@color/text_secondary">
-
-                <EditText
-                    android:id="@+id/edit_nickname"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/msg_nickname"
-                    android:hint="@string/msg_nickname"
-                    android:textColor="@color/text_secondary" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
                 android:id="@+id/text_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

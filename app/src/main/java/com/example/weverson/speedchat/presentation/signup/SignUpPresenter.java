@@ -1,13 +1,13 @@
 package com.example.weverson.speedchat.presentation.signup;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Patterns;
 
 import com.example.weverson.speedchat.domain.user.User;
 import com.example.weverson.speedchat.domain.user.usercase.SignUpUseCase;
 
 import javax.inject.Inject;
+
+import rx.Subscriber;
 
 public class SignUpPresenter implements SignUpContract.Presenter {
 
@@ -15,11 +15,8 @@ public class SignUpPresenter implements SignUpContract.Presenter {
 
     private SignUpUseCase mSignUpUseCase;
 
-    private Context mContext;
-
     @Inject
-    public SignUpPresenter(SignUpContract.View view, SignUpUseCase signUpUseCase, Context context) {
-        mContext = context;
+    public SignUpPresenter(SignUpContract.View view, SignUpUseCase signUpUseCase) {
         mSignUpView = view;
         mSignUpUseCase = signUpUseCase;
     }
@@ -34,19 +31,24 @@ public class SignUpPresenter implements SignUpContract.Presenter {
 
     }
 
-    private void createNewAccountFail(Throwable throwable) {
-        mSignUpView.showFailMessage(throwable.getMessage());
-    }
-
-    private void createNewAccountSuccess(){
-        mSignUpView.showConfirmationMessage();
-    }
-
-
     @Override
     public void createNewAccount(@NonNull String email, @NonNull String password) {
         User user = new User(email, password);
-        mSignUpUseCase.execute(new SignUpUseCase.RequestValues(user))
-                .subscribe(v -> {}, this::createNewAccountFail, this::createNewAccountSuccess);
+        mSignUpUseCase.execute(new SignUpUseCase.RequestValues(user)).subscribe(new Subscriber() {
+            @Override
+            public void onCompleted() {
+                mSignUpView.showConfirmationMessage();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mSignUpView.showFailMessage(e.getMessage());
+            }
+
+            @Override
+            public void onNext(Object o) {
+
+            }
+        });
     }
 }

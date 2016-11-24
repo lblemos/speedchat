@@ -1,6 +1,5 @@
 package com.example.weverson.speedchat.domain.user.usercase;
 
-import com.example.weverson.speedchat.data.AuthenticationException;
 import com.example.weverson.speedchat.data.firebase.authentication.FirebaseAuthentication;
 import com.example.weverson.speedchat.domain.Authenticable;
 import com.example.weverson.speedchat.domain.UseCase;
@@ -8,7 +7,6 @@ import com.example.weverson.speedchat.domain.UseCase;
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.Subscriber;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -24,25 +22,7 @@ public class SignUpUseCase extends UseCase<SignUpUseCase.RequestValues, Void> {
 
     @Override
     protected Observable<Void> run(RequestValues requestValues) {
-        return Observable.create(subscriber -> {
-            mAuth.createNewUser(requestValues.getAuthenticable()).subscribe(new Subscriber<Void>() {
-                @Override
-                public void onCompleted() {
-                    mAuth.updateProfile(requestValues.getAuthenticable())
-                            .subscribe(v -> {}, e -> subscriber.onError(new AuthenticationException(e.getMessage())), () -> subscriber.onCompleted());
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    subscriber.onError(new AuthenticationException(e.getMessage()));
-                }
-
-                @Override
-                public void onNext(Void aVoid) {
-
-                }
-            });
-        });
+        return mAuth.createNewUser(requestValues.getAuthenticable());
     }
 
     public static final class RequestValues extends UseCase.RequestValues{
