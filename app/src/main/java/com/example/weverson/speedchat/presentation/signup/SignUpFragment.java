@@ -44,7 +44,7 @@ public class SignUpFragment extends Fragment implements SignUpContract.View {
     @BindView(R.id.edit_confirm_password)
     EditText mEditConfirmPassword;
 
-    @BindView(R.id.button_sign_up)
+    @BindView(R.id.button_sign_in)
     Button mButtonSignUp;
 
     @BindView(R.id.text_sign_in)
@@ -70,7 +70,7 @@ public class SignUpFragment extends Fragment implements SignUpContract.View {
     }
 
 
-    @OnClick(R.id.button_sign_up)
+    @OnClick(R.id.button_sign_in)
     public void signUp() {
 
         String email = getEmail();
@@ -89,7 +89,7 @@ public class SignUpFragment extends Fragment implements SignUpContract.View {
         startActivity(it);
     }
 
-    protected boolean checkForm(){
+    private boolean checkForm(){
 
         final String email = getEmail();
         final String password = getPassword();
@@ -97,26 +97,26 @@ public class SignUpFragment extends Fragment implements SignUpContract.View {
         boolean isValid = true;
 
         if (checkInputEmpty(email)) {
-            mEditEmail.setError(getContext().getString(R.string.msg_email_empty));
+            mEditEmail.setError(getContext().getString(R.string.error_email_empty));
             isValid = false;
         }
 
         if (checkInputEmpty(password)) {
-            mEditPassword.setError(getContext().getString(R.string.msg_password_empty));
+            mEditPassword.setError(getContext().getString(R.string.error_password_empty));
             isValid = false;
         }
 
         if (checkEmailValid(email)) {
-            mEditEmail.setError(getContext().getString(R.string.msg_email_invalid));
+            mEditEmail.setError(getContext().getString(R.string.error_email_invalid));
             isValid = false;
         }
 
         if (checkInputEmpty(confirmPassword)) {
-            mEditConfirmPassword.setError(getContext().getString(R.string.msg_confirm_password_empty));
+            mEditConfirmPassword.setError(getContext().getString(R.string.error_confirm_password_empty));
             isValid = false;
 
         } else if (!checkInputEquals(password, confirmPassword)) {
-            mEditConfirmPassword.setError(getContext().getString(R.string.msg_passwords_same));
+            mEditConfirmPassword.setError(getContext().getString(R.string.error_passwords_same));
             isValid = false;
         }
 
@@ -130,15 +130,15 @@ public class SignUpFragment extends Fragment implements SignUpContract.View {
         animateForm(mLinearSignUp);
     }
 
-    protected String getEmail(){
+    private String getEmail(){
         return mEditEmail.getText().toString().trim();
     }
 
-    protected String getPassword(){
+    private String getPassword(){
         return mEditPassword.getText().toString().trim();
     }
 
-    protected String getConfirmPassword(){
+    private String getConfirmPassword(){
         return mEditConfirmPassword.getText().toString().trim();
     }
 

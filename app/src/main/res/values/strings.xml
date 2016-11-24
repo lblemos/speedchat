@@ -15,9 +15,9 @@
     <string name="action_sign_up">Sign Up</string>
     <string name="msg_create_account_success">Account created with success!!!</string>
     <string name="msg_name_empty">The name can not be empty</string>
-    <string name="msg_email_empty">The email can not be empty</string>
-    <string name="msg_password_empty">The password can not be empty</string>
-    <string name="msg_email_invalid">The email not valid</string>
-    <string name="msg_confirm_password_empty">The Confirm password can not be empty</string>
-    <string name="msg_passwords_same">The passwords are not the same</string>
+    <string name="error_email_empty">The email can not be empty</string>
+    <string name="error_password_empty">The password can not be empty</string>
+    <string name="error_email_invalid">The email not valid</string>
+    <string name="error_confirm_password_empty">The Confirm password can not be empty</string>
+    <string name="error_passwords_same">The passwords are not the same</string>
 </resources>

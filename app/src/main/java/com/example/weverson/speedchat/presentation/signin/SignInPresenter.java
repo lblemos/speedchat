@@ -1,6 +1,8 @@
 package com.example.weverson.speedchat.presentation.signin;
 
 
+import android.support.annotation.NonNull;
+
 import javax.inject.Inject;
 
 public class SignInPresenter implements SignInContract.Presenter{
@@ -22,4 +24,8 @@ public class SignInPresenter implements SignInContract.Presenter{
 
     }
 
+    @Override
+    public void signIn(@NonNull String email, @NonNull String password) {
+
+    }
 }
