@@ -8,7 +8,7 @@ import com.example.weverson.speedchat.presentation.BaseView;
 public interface SignInContract {
 
     interface View extends BaseView<Presenter>{
-
+        void openChannels();
     }
 
     interface Presenter extends BasePresenter {

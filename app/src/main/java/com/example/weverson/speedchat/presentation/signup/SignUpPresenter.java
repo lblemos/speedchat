@@ -34,7 +34,7 @@ public class SignUpPresenter implements SignUpContract.Presenter {
     @Override
     public void createNewAccount(@NonNull String email, @NonNull String password) {
         User user = new User(email, password);
-        mSignUpUseCase.execute(new SignUpUseCase.RequestValues(user)).subscribe(new Subscriber() {
+        mSignUpUseCase.execute(new SignUpUseCase.RequestValues(user)).subscribe(new Subscriber<Object>() {
             @Override
             public void onCompleted() {
                 mSignUpView.showConfirmationMessage();
@@ -46,7 +46,7 @@ public class SignUpPresenter implements SignUpContract.Presenter {
             }
 
             @Override
-            public void onNext(Object o) {
+            public void onNext(Object aVoid) {
 
             }
         });

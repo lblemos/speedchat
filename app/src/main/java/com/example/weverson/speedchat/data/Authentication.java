@@ -8,4 +8,6 @@ public interface Authentication {
 
     Observable<Void> createNewUser(Authenticable authenticable);
 
+    Observable<Void> SignIn(Authenticable authenticable);
+
 }

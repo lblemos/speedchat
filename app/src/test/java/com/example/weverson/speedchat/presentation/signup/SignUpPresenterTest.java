@@ -4,11 +4,8 @@ import com.example.weverson.speedchat.domain.user.usercase.SignUpUseCase;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import rx.Observable;
 
@@ -17,8 +14,6 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(SignUpPresenter.class)
 public class SignUpPresenterTest {
 
     @Mock

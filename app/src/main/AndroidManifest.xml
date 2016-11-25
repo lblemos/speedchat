@@ -18,9 +18,8 @@
         </activity>
         <activity
             android:name=".presentation.signup.SignUpActivity"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
-
+            android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name=".presentation.channels.ChannelsActivity"></activity>
     </application>
 
 </manifest>

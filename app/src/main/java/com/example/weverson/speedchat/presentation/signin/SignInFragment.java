@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.weverson.speedchat.R;
+import com.example.weverson.speedchat.presentation.channels.ChannelsActivity;
 import com.example.weverson.speedchat.presentation.signup.SignUpActivity;
 
 import butterknife.BindView;
@@ -107,4 +108,9 @@ public class SignInFragment extends Fragment implements SignInContract.View {
         return mEditPassword.getText().toString().trim();
     }
 
+    @Override
+    public void openChannels() {
+        Intent it = new Intent(getContext(), ChannelsActivity.class);
+        startActivity(it);
+    }
 }
