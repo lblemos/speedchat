@@ -36,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void initializeDagger() {
         DaggerSignUpComponent.builder()
                 .mainComponent(((MainApplication) getApplication()).getMainComponent())
+                .repositoryComponent(((MainApplication) getApplication()).getRepositoryComponent())
                 .signUpModule(new SignUpModule(mSignUpFragment)).build()
                 .inject(this);
 

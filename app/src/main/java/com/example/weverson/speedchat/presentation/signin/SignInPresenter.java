@@ -4,11 +4,13 @@ package com.example.weverson.speedchat.presentation.signin;
 import android.support.annotation.NonNull;
 
 import com.example.weverson.speedchat.domain.user.User;
-import com.example.weverson.speedchat.domain.user.usercase.SignInUseCase;
+import com.example.weverson.speedchat.domain.user.interactor.SignInUseCase;
 
 import javax.inject.Inject;
 
 import rx.Subscriber;
+
+import static com.example.weverson.speedchat.utils.Validation.checkEmpty;
 
 public class SignInPresenter implements SignInContract.Presenter{
 
@@ -34,23 +36,39 @@ public class SignInPresenter implements SignInContract.Presenter{
 
     @Override
     public void signIn(@NonNull String email, @NonNull String password) {
-
         User user = new User(email, password);
-        mSignInUseCase.execute(new SignInUseCase.RequestValues(user)).subscribe(new Subscriber<Void>() {
-            @Override
-            public void onCompleted() {
-                mSignInView.openChannels();
-            }
+        boolean emailEmpty = checkEmpty(user.getEmail());
+        boolean passwordEmpty = checkEmpty(user.getPassword());
 
-            @Override
-            public void onError(Throwable e) {
+        if(emailEmpty){
+            mSignInView.showMessageErrorEmailEmpty();
+        }
 
-            }
+        if(passwordEmpty) {
+            mSignInView.showMessageErrorPasswordEmpty();
+        }
 
-            @Override
-            public void onNext(Void aVoid) {
+        if(!emailEmpty && !passwordEmpty) {
+            mSignInUseCase.execute(new SignInUseCase.Request(user))
+                    .subscribe(new SignInSubscriber());
+        }
 
-            }
-        });
+    }
+
+    private final class SignInSubscriber extends Subscriber<Void> {
+        @Override
+        public void onCompleted() {
+            mSignInView.openChannels();
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            mSignInView.showFailMessage(e.getMessage());
+        }
+
+        @Override
+        public void onNext(Void aVoid) {
+
+        }
     }
 }

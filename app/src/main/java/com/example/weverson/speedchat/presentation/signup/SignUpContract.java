@@ -16,9 +16,13 @@ public interface SignUpContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showConfirmationMessage();
+        void openChannels();
 
         void showFailMessage(String message);
+
+        void showMessageErrorEmailEmpty();
+
+        void showMessageErrorPasswordEmpty();
 
     }
 

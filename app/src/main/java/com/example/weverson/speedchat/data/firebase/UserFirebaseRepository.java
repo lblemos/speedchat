@@ -1,7 +1,7 @@
-package com.example.weverson.speedchat.data.firebase.authentication;
+package com.example.weverson.speedchat.data.firebase;
 
-import com.example.weverson.speedchat.data.Authentication;
-import com.example.weverson.speedchat.domain.Authenticable;
+import com.example.weverson.speedchat.data.repository.UserRepository;
+import com.example.weverson.speedchat.domain.abstraction.Authenticable;
 import com.google.firebase.auth.FirebaseAuth;
 
 import javax.inject.Inject;
@@ -9,12 +9,12 @@ import javax.inject.Inject;
 import rx.Emitter;
 import rx.Observable;
 
-public class FirebaseAuthentication implements Authentication {
+public class UserFirebaseRepository implements UserRepository {
 
     private FirebaseAuth mAuth;
 
     @Inject
-    public FirebaseAuthentication(FirebaseAuth auth) {
+    public UserFirebaseRepository(FirebaseAuth auth) {
         mAuth = auth;
     }
 

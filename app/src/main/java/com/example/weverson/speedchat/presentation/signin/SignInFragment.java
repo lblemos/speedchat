@@ -3,6 +3,7 @@ package com.example.weverson.speedchat.presentation.signin;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.weverson.speedchat.presentation.utils.Animations.animateForm;
-import static com.example.weverson.speedchat.presentation.utils.FormValidation.checkEmailValid;
-import static com.example.weverson.speedchat.presentation.utils.FormValidation.checkInputEmpty;
+import static com.example.weverson.speedchat.utils.Animations.animateForm;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 
@@ -72,31 +71,7 @@ public class SignInFragment extends Fragment implements SignInContract.View {
 
     @OnClick(R.id.button_sign_in)
     public void signIn() {
-        if (checkForm()) {
-            mSignInPresenter.signIn(getEmail(), getPassword());
-        }
-    }
-
-    private boolean checkForm(){
-
-        final String email = getEmail();
-        final String password = getPassword();
-        boolean isValid = true;
-
-        if(checkInputEmpty(email)){
-            mEditEmail.setError(getString(R.string.error_email_empty));
-            isValid = false;
-        } else if(checkEmailValid(email)) {
-            mEditEmail.setError(getString(R.string.error_email_invalid));
-            isValid = false;
-        }
-
-        if(checkInputEmpty(password)){
-            mEditPassword.setError(getString(R.string.error_password_empty));
-            isValid = false;
-        }
-
-        return isValid;
+        mSignInPresenter.signIn(getEmail(), getPassword());
     }
 
     private String getEmail() {
@@ -112,5 +87,20 @@ public class SignInFragment extends Fragment implements SignInContract.View {
     public void openChannels() {
         Intent it = new Intent(getContext(), ChannelsActivity.class);
         startActivity(it);
+    }
+
+    @Override
+    public void showFailMessage(String message) {
+        Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showMessageErrorEmailEmpty() {
+        mEditEmail.setError(getString(R.string.error_email_empty));
+    }
+
+    @Override
+    public void showMessageErrorPasswordEmpty() {
+        mEditPassword.setError(getString(R.string.error_password_empty));
     }
 }

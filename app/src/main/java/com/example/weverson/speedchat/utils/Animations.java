@@ -1,4 +1,4 @@
-package com.example.weverson.speedchat.presentation.utils;
+package com.example.weverson.speedchat.utils;
 
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;

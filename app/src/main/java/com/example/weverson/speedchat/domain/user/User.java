@@ -2,7 +2,7 @@ package com.example.weverson.speedchat.domain.user;
 
 import android.support.annotation.NonNull;
 
-import com.example.weverson.speedchat.domain.Authenticable;
+import com.example.weverson.speedchat.domain.abstraction.Authenticable;
 
 public class User implements Authenticable{
 

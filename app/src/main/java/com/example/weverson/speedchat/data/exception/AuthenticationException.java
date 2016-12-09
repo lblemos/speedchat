@@ -1,4 +1,4 @@
-package com.example.weverson.speedchat.data;
+package com.example.weverson.speedchat.data.exception;
 
 public class AuthenticationException extends Exception {
 

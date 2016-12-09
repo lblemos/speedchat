@@ -1,6 +1,6 @@
 package com.example.weverson.speedchat.presentation.signup;
 
-import com.example.weverson.speedchat.domain.user.usercase.SignUpUseCase;
+import com.example.weverson.speedchat.domain.user.interactor.SignUpUseCase;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,25 +33,53 @@ public class SignUpPresenterTest {
     }
 
     @Test
-    public void createNewAccount_showMessageUi() {
+    public void signIn_showMessageErrorEmailEmpty() {
 
-        when(mSignUpUseCase.execute(any(SignUpUseCase.RequestValues.class)))
+        when(mSignUpUseCase.execute(any(SignUpUseCase.Request.class)))
                 .thenReturn(Observable.just(null));
 
-        mSignUpPresenter.createNewAccount("john@gmail.com", "123123");
+        mSignUpPresenter.createNewAccount("", "test");
 
-        verify(mSignUpView).showConfirmationMessage();
+        verify(mSignUpView).showMessageErrorEmailEmpty();
+
+    }
+
+    @Test
+    public void signIn_showMessageErrorPasswordEmpty() {
+
+        when(mSignUpUseCase.execute(any(SignUpUseCase.Request.class)))
+                .thenReturn(Observable.just(null));
+
+        mSignUpPresenter.createNewAccount("test@test.com.br", "");
+
+        verify(mSignUpView).showMessageErrorPasswordEmpty();
+
+    }
+
+    @Test
+    public void createNewAccount_openChannels() {
+
+        when(mSignUpUseCase.execute(any(SignUpUseCase.Request.class)))
+                .thenReturn(Observable.just(null));
+
+
+        mSignUpPresenter.createNewAccount("test@test.com.br", "test");
+
+        verify(mSignUpView).openChannels();
+
     }
 
     @Test
     public void createNewAccount_showMessageFailUi() {
 
-        when(mSignUpUseCase.execute(any(SignUpUseCase.RequestValues.class)))
-                .thenReturn(Observable.error(new Exception()));
+        when(mSignUpUseCase.execute(any(SignUpUseCase.Request.class)))
+                .thenReturn(Observable.error(new Exception("Error")));
 
-        mSignUpPresenter.createNewAccount("john@gmail.com", "1234");
+
+        mSignUpPresenter.createNewAccount("test@test.com.com", "test");
 
         verify(mSignUpView).showFailMessage(anyString());
+
     }
 
 }
