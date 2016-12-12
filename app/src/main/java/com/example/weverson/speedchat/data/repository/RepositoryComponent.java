@@ -10,4 +10,7 @@ public interface RepositoryComponent {
     @Firebase
     UserRepository getUserRepository();
 
+    @Firebase
+    ChannelRepository getChannelRepository();
+
 }

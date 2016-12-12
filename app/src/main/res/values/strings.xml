@@ -17,4 +17,7 @@
     <string name="error_passwords_same">The passwords are not the same</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_up">Sign Up</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

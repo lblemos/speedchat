@@ -22,7 +22,7 @@ public class SignUpUseCase extends UseCase<Void, SignUpUseCase.Request> {
     }
 
     @Override
-    public Observable<Void> createObservable(SignUpUseCase.Request request) {
+    public Observable<Void> createObservable(Request request) {
         return mAuth.createNewUser(request.getAuthenticable());
     }
 

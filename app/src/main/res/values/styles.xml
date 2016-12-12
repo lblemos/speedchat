@@ -30,4 +30,14 @@
         <item name="android:padding">@dimen/large</item>
     </style>
 
+    <style name="text_item_title_black">
+        <item name="android:textSize">@dimen/small_text</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_item_black">
+        <item name="android:textSize">@dimen/small_text</item>
+    </style>
+
+
 </resources>
