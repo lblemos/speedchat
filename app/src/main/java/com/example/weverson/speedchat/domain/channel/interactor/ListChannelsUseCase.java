@@ -8,11 +8,13 @@ import com.example.weverson.speedchat.domain.abstraction.UseCase;
 import com.example.weverson.speedchat.domain.channel.Channel;
 import com.example.weverson.speedchat.domain.user.User;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import rx.Observable;
 
-public class ListChannelsUseCase extends UseCase<Channel, ListChannelsUseCase.Request> {
+public class ListChannelsUseCase extends UseCase<List<Channel>, ListChannelsUseCase.Request> {
 
 
     UserRepository mUserRepository;
@@ -26,11 +28,13 @@ public class ListChannelsUseCase extends UseCase<Channel, ListChannelsUseCase.Re
     }
 
     @Override
-    public Observable<Channel> createObservable(Request request) {
+    public Observable<List<Channel>> createObservable(Request request) {
         Authenticable auth = mUserRepository.getCurrentUser(new User());
-        return mUserRepository.getUserChannels(auth)
+
+        return mChannelRepository.fetchChannelsBy(auth)
                 .flatMap(Observable::from)
-                .flatMap(mChannelRepository::getChannel);
+                .flatMap(channelName -> mChannelRepository.fetchChannelBy(channelName))
+                .toList();
     }
 
     public static class Request extends UseCase.Request {

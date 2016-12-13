@@ -60,23 +60,4 @@ public class UserFirebaseRepository implements UserRepository {
         return authenticable;
     }
 
-    @Override
-    public Observable<List<String>> getUserChannels(Authenticable authenticable) {
-        Query channels = mReference.child("users").child(authenticable.getUid()).child("channels")
-                .orderByValue().equalTo(true);
-        return mFirebaseObservableListeners.listenToValueEvents(channels, toChannels());
-    }
-
-    private static Func1<DataSnapshot, List<String>> toChannels() {
-        return dataSnapshot -> {
-            List<String> channels = new ArrayList<>();
-            if (dataSnapshot.hasChildren()) {
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                for (DataSnapshot child : children) {
-                    channels.add(child.getKey());
-                }
-            }
-            return channels;
-        };
-    }
 }

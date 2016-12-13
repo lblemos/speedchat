@@ -3,6 +3,8 @@ package com.example.weverson.speedchat.presentation.channels;
 import com.example.weverson.speedchat.domain.channel.Channel;
 import com.example.weverson.speedchat.domain.channel.interactor.ListChannelsUseCase;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import rx.Subscriber;
@@ -26,21 +28,21 @@ class ChannelsPresenter implements ChannelsContract.Presenter {
 
     @Override
     public void start() {
-        mChannelsView.createChannel();
         listChannels();
     }
 
     @Override
     public void listChannels() {
+        mChannelsView.displayRefreshing(true);
         mListChannelsUseCase.execute(new ListChannelsUseCase.Request())
                 .subscribe(new ChannelsSubscriber());
     }
 
-    private final class ChannelsSubscriber extends Subscriber<Channel> {
+    private final class ChannelsSubscriber extends Subscriber<List<Channel>>  {
 
         @Override
         public void onCompleted() {
-
+            mChannelsView.displayRefreshing(false);
         }
 
         @Override
@@ -49,8 +51,8 @@ class ChannelsPresenter implements ChannelsContract.Presenter {
         }
 
         @Override
-        public void onNext(Channel channel) {
-            mChannelsView.addChannel(channel);
+        public void onNext(List<Channel> channels) {
+            mChannelsView.displayChannels(channels);
         }
     }
 }

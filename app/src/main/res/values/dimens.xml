@@ -4,7 +4,7 @@
     <dimen name="vertical">16dp</dimen>
 
     <dimen name="micro">12dp</dimen>
-    <dimen name="small">14dp</dimen>
+    <dimen name="small">16dp</dimen>
     <dimen name="medium">18dp</dimen>
     <dimen name="large">22dp</dimen>
 
@@ -13,4 +13,5 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="image_item_size">40dp</dimen>
 </resources>

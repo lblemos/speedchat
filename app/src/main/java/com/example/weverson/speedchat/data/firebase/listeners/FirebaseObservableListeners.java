@@ -13,4 +13,8 @@ public class FirebaseObservableListeners {
         return Observable.create(new ListenToValueEventsOnSubscribe<>(query, marshaller));
     }
 
+    public <T> Observable<T> listenToSingleValueEvents(Query query, Func1<DataSnapshot, T> marshaller){
+        return Observable.create(new ListenToSingleValueOnSubscribe<>(query, marshaller));
+    }
+
 }

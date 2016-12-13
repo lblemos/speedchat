@@ -1,42 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="@dimen/activity_horizontal_margin">
+    android:padding="@dimen/small">
 
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:src="@drawable/ic_channel" />
 
-    <LinearLayout
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image_channel"
+        android:layout_width="@dimen/image_item_size"
+        android:layout_height="@dimen/image_item_size"
+        android:layout_marginEnd="@dimen/micro"
+        android:layout_marginRight="@dimen/micro"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_channels" />
+
+
+    <TextView
+        android:id="@+id/text_title"
+        style="@style/text_item_title_black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:text="Title"
+        android:layout_toRightOf="@+id/image_channel"
+        android:layout_toEndOf="@+id/image_channel" />
 
-        <TextView
-            android:id="@+id/text_title"
-            style="@style/text_item_title_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Title" />
-
-        <TextView
-            android:id="@+id/text_description"
-            style="@style/text_item_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Description for channel" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/small"
-            android:background="@color/primary_color" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/text_description"
+        style="@style/text_item_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description for channel"
+        android:layout_below="@+id/text_title"
+        android:layout_toRightOf="@+id/image_channel"
+        android:layout_toEndOf="@+id/image_channel" />
 
 
-</LinearLayout>
+</RelativeLayout>

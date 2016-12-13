@@ -1,7 +1,9 @@
 package com.example.weverson.speedchat.presentation.channels;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 
 import com.example.weverson.speedchat.MainApplication;
@@ -17,6 +19,9 @@ public class ChannelsActivity extends AppCompatActivity {
     @BindView(R.id.frame_channels)
     FrameLayout mFrameChannels;
 
+    @BindView(R.id.toolbar_channels)
+    Toolbar mToolbarChannels;
+
     private ChannelsFragment mChannelsFragment;
 
     @Inject
@@ -30,12 +35,14 @@ public class ChannelsActivity extends AppCompatActivity {
 
         initializeFragment();
         initializeDagger();
+        initializeToolbar();
 
     }
 
     private void initializeFragment() {
-        if (mFrameChannels != null) {
-            mChannelsFragment = new ChannelsFragment();
+        mChannelsFragment = (ChannelsFragment) getSupportFragmentManager().findFragmentById(R.id.frame_channels);
+        if (mFrameChannels != null && mChannelsFragment == null) {
+            mChannelsFragment = ChannelsFragment.getInstance();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.frame_channels, mChannelsFragment)
                     .commit();
@@ -49,6 +56,18 @@ public class ChannelsActivity extends AppCompatActivity {
                 .channelsModule(new ChannelsModule(mChannelsFragment))
                 .build()
                 .inject(this);
+
+    }
+
+    private void initializeToolbar() {
+
+        setSupportActionBar(mToolbarChannels);
+        ActionBar toolbar = getSupportActionBar();
+
+        if(toolbar != null) {
+            toolbar.setTitle("Channels");
+        }
+
 
     }
 
