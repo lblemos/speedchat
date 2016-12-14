@@ -1,6 +1,6 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.weverson.speedchat.presentation.channels.ChannelsFragment">
@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="@dimen/small"
-        android:src="@drawable/ic_add" />
+        android:src="@drawable/ic_add"
+        app:layout_behavior="com.example.weverson.speedchat.presentation.channels.ChannelScroll" />
 
 </android.support.design.widget.CoordinatorLayout>

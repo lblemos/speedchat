@@ -4,6 +4,7 @@ package com.example.weverson.speedchat.presentation.channels;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -49,6 +50,7 @@ public class ChannelsFragment extends Fragment implements ChannelsContract.View 
         ChannelsAdapter channelsAdapter = new ChannelsAdapter(channels);
         mRecyclerChannels.setLayoutManager(linearLayoutManager);
         mRecyclerChannels.setAdapter(new AlphaInAnimationAdapter(channelsAdapter));
+        mRecyclerChannels.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
     }
 
     @Override

@@ -13,7 +13,7 @@
         android:layout_height="@dimen/image_item_size"
         android:layout_marginEnd="@dimen/micro"
         android:layout_marginRight="@dimen/micro"
-        app:civ_border_color="@color/text_primary"
+        app:civ_border_color="@color/color_accent"
         app:civ_border_width="2dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_channels" />
@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Title"
+        android:layout_marginTop="@dimen/nano"
         android:layout_toRightOf="@+id/image_channel"
         android:layout_toEndOf="@+id/image_channel" />
 
