@@ -12,8 +12,6 @@ public interface ChannelsContract {
 
         void displayChannels(List<Channel> channels);
 
-        void displayRefreshing(boolean enable);
-
     }
 
     interface Presenter extends BasePresenter {

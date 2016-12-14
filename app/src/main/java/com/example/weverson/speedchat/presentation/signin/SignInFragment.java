@@ -61,6 +61,7 @@ public class SignInFragment extends Fragment implements SignInContract.View {
     @Override
     public void onStart() {
         super.onStart();
+        mSignInPresenter.autoSignIn();
         animateForm(mLinearSignIn);
     }
 

@@ -10,6 +10,6 @@ public interface UserRepository {
 
     Observable<Void> SignIn(Authenticable authenticable);
 
-    Authenticable getCurrentUser(Authenticable authenticable);
+    Authenticable fetchCurrentUser(Authenticable authenticable);
 
 }

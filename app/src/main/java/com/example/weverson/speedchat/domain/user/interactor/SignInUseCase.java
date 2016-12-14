@@ -5,7 +5,8 @@ import android.support.annotation.NonNull;
 import com.example.weverson.speedchat.data.repository.UserRepository;
 import com.example.weverson.speedchat.domain.abstraction.Authenticable;
 import com.example.weverson.speedchat.domain.abstraction.UseCase;
-import com.example.weverson.speedchat.dagger.qualifier.Firebase;
+import com.example.weverson.speedchat.domain.user.User;
+import com.example.weverson.speedchat.utils.dagger.qualifier.Firebase;
 
 import javax.inject.Inject;
 
@@ -25,12 +26,23 @@ public class SignInUseCase extends UseCase<Void, SignInUseCase.Request> {
 
     @Override
     public Observable<Void> createObservable(Request request) {
+        Authenticable auth = mRepository.fetchCurrentUser(new User());
+
+        if(auth.getUid() != null) {
+            return Observable.empty();
+        }
+
         return mRepository.SignIn(request.getAuthenticable());
+
     }
 
     public static final class Request extends UseCase.Request {
 
         private Authenticable mAuth;
+
+        public Request() {
+
+        }
 
         public Request(@NonNull Authenticable auth) {
             mAuth = checkNotNull(auth, "the authenticable can not be null");

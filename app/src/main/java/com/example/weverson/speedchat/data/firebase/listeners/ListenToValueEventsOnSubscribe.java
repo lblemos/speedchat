@@ -44,7 +44,6 @@ class ListenToValueEventsOnSubscribe<T> implements Observable.OnSubscribe<T> {
             if (!subscriber.isUnsubscribed()) {
                 subscriber.onNext(marshaller.call(dataSnapshot));
             }
-
         }
 
         @Override

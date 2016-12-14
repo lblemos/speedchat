@@ -5,17 +5,11 @@ import com.example.weverson.speedchat.data.repository.UserRepository;
 import com.example.weverson.speedchat.domain.abstraction.Authenticable;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Query;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.functions.Func1;
 
 public class UserFirebaseRepository implements UserRepository {
 
@@ -43,14 +37,16 @@ public class UserFirebaseRepository implements UserRepository {
 
     public Observable<Void> SignIn(Authenticable authenticable) {
         return Observable.create(subscriber -> {
-            mAuth.signInWithEmailAndPassword(authenticable.getEmail(), authenticable.getPassword())
-                    .addOnSuccessListener(v -> subscriber.onCompleted())
-                    .addOnFailureListener(subscriber::onError);
+            if (authenticable != null) {
+                mAuth.signInWithEmailAndPassword(authenticable.getEmail(), authenticable.getPassword())
+                        .addOnSuccessListener(v -> subscriber.onCompleted())
+                        .addOnFailureListener(subscriber::onError);
+            }
         });
     }
 
     @Override
-    public Authenticable getCurrentUser(Authenticable authenticable) {
+    public Authenticable fetchCurrentUser(Authenticable authenticable) {
 
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         if (firebaseUser != null) {

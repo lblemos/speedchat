@@ -55,6 +55,12 @@ public class SignInPresenter implements SignInContract.Presenter{
 
     }
 
+    @Override
+    public void autoSignIn() {
+        mSignInUseCase.execute(new SignInUseCase.Request())
+                .subscribe(new SignInSubscriber());
+    }
+
     private final class SignInSubscriber extends Subscriber<Void> {
         @Override
         public void onCompleted() {

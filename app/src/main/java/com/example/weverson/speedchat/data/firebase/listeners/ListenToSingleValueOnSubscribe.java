@@ -44,6 +44,7 @@ class ListenToSingleValueOnSubscribe<T> implements Observable.OnSubscribe<T> {
             }
 
             subscriber.onCompleted();
+
         }
 
         @Override

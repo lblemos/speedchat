@@ -4,7 +4,6 @@ package com.example.weverson.speedchat.presentation.channels;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,7 +17,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -27,8 +26,6 @@ public class ChannelsFragment extends Fragment implements ChannelsContract.View 
     @BindView(R.id.Recycler_channels)
     RecyclerView mRecyclerChannels;
 
-    @BindView(R.id.swipe_channels)
-    SwipeRefreshLayout mSwipeChannels;
 
     private ChannelsContract.Presenter mChannelsPresenter;
 
@@ -37,12 +34,7 @@ public class ChannelsFragment extends Fragment implements ChannelsContract.View 
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_channels, container, false);
         ButterKnife.bind(this, view);
-        initializeListeners();
         return view;
-    }
-
-    private void initializeListeners() {
-        mSwipeChannels.setOnRefreshListener(new UpdateChannels());
     }
 
     @Override
@@ -56,13 +48,7 @@ public class ChannelsFragment extends Fragment implements ChannelsContract.View 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         ChannelsAdapter channelsAdapter = new ChannelsAdapter(channels);
         mRecyclerChannels.setLayoutManager(linearLayoutManager);
-        mRecyclerChannels.setAdapter(channelsAdapter);
-        mRecyclerChannels.setAdapter(new ScaleInAnimationAdapter(channelsAdapter));
-    }
-
-    @Override
-    public void displayRefreshing(boolean enable) {
-        mSwipeChannels.setRefreshing(enable);
+        mRecyclerChannels.setAdapter(new AlphaInAnimationAdapter(channelsAdapter));
     }
 
     @Override
@@ -73,14 +59,6 @@ public class ChannelsFragment extends Fragment implements ChannelsContract.View 
 
     public static ChannelsFragment getInstance() {
         return new ChannelsFragment();
-    }
-
-    private final class UpdateChannels implements SwipeRefreshLayout.OnRefreshListener{
-        @Override
-        public void onRefresh() {
-            mChannelsPresenter.listChannels();
-
-        }
     }
 
 

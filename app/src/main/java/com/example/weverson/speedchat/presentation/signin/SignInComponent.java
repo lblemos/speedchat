@@ -2,7 +2,7 @@ package com.example.weverson.speedchat.presentation.signin;
 
 import com.example.weverson.speedchat.MainComponent;
 import com.example.weverson.speedchat.data.repository.RepositoryComponent;
-import com.example.weverson.speedchat.dagger.scoop.FragmentScoped;
+import com.example.weverson.speedchat.utils.dagger.scoop.FragmentScoped;
 
 import dagger.Component;
 

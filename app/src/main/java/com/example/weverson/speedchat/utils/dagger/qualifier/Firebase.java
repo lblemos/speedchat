@@ -1,4 +1,4 @@
-package com.example.weverson.speedchat.dagger.qualifier;
+package com.example.weverson.speedchat.utils.dagger.qualifier;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

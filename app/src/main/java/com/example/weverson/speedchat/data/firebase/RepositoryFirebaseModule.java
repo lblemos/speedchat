@@ -1,6 +1,6 @@
 package com.example.weverson.speedchat.data.firebase;
 
-import com.example.weverson.speedchat.dagger.qualifier.Firebase;
+import com.example.weverson.speedchat.utils.dagger.qualifier.Firebase;
 import com.example.weverson.speedchat.data.firebase.listeners.FirebaseObservableListeners;
 import com.example.weverson.speedchat.data.repository.ChannelRepository;
 import com.example.weverson.speedchat.data.repository.UserRepository;

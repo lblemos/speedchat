@@ -40,10 +40,10 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelsAdapter.ViewHo
         Glide
                 .with(holder.itemView.getContext())
                 .load(channel.getImage())
+                .asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
                 .placeholder(R.drawable.ic_channels)
-                .crossFade()
                 .into(holder.mImageChannel);
 
     }

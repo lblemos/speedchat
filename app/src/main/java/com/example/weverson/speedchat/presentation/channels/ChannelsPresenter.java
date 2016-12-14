@@ -33,7 +33,6 @@ class ChannelsPresenter implements ChannelsContract.Presenter {
 
     @Override
     public void listChannels() {
-        mChannelsView.displayRefreshing(true);
         mListChannelsUseCase.execute(new ListChannelsUseCase.Request())
                 .subscribe(new ChannelsSubscriber());
     }
@@ -42,7 +41,7 @@ class ChannelsPresenter implements ChannelsContract.Presenter {
 
         @Override
         public void onCompleted() {
-            mChannelsView.displayRefreshing(false);
+
         }
 
         @Override

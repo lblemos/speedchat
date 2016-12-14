@@ -1,4 +1,4 @@
-package com.example.weverson.speedchat.dagger.scoop;
+package com.example.weverson.speedchat.utils.dagger.scoop;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

@@ -46,7 +46,6 @@
                     android:id="@+id/edit_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/msg_email"
                     android:hint="@string/msg_email"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/text_secondary" />
@@ -66,7 +65,6 @@
                     android:id="@+id/edit_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/msg_password"
                     android:hint="@string/msg_password"
                     android:inputType="textPassword"
                     android:textColor="@color/text_secondary" />

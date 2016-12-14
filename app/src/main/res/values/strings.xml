@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Speed Chat</string>
     <string name="title_sign_up">Create New Account</string>
+    <string name="msg_sign_in">sign in</string>
     <string name="msg_nickname">Nickname</string>
     <string name="msg_email">E-mail</string>
     <string name="msg_password">Password</string>

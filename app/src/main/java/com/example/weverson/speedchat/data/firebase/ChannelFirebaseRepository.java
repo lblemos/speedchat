@@ -38,11 +38,8 @@ public class ChannelFirebaseRepository implements ChannelRepository {
         return mFirebaseObservableListeners.listenToSingleValueEvents(channels, toChannels());
     }
 
-
     private static Func1<DataSnapshot, Channel> toChannel() {
-
         return dataSnapshot -> {
-
             Channel channel = null;
             if (dataSnapshot.hasChildren()) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
@@ -51,7 +48,6 @@ public class ChannelFirebaseRepository implements ChannelRepository {
             }
             return channel;
         };
-
     }
 
     private static Func1<DataSnapshot, List<String>> toChannels() {

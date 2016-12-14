@@ -20,6 +20,8 @@ public interface SignInContract {
 
     interface Presenter extends BasePresenter {
         void signIn(@NonNull String email, @NonNull String password);
+
+        void autoSignIn();
     }
 
 }

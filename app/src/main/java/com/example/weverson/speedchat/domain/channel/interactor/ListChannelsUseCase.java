@@ -1,12 +1,12 @@
 package com.example.weverson.speedchat.domain.channel.interactor;
 
-import com.example.weverson.speedchat.dagger.qualifier.Firebase;
 import com.example.weverson.speedchat.data.repository.ChannelRepository;
 import com.example.weverson.speedchat.data.repository.UserRepository;
 import com.example.weverson.speedchat.domain.abstraction.Authenticable;
 import com.example.weverson.speedchat.domain.abstraction.UseCase;
 import com.example.weverson.speedchat.domain.channel.Channel;
 import com.example.weverson.speedchat.domain.user.User;
+import com.example.weverson.speedchat.utils.dagger.qualifier.Firebase;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class ListChannelsUseCase extends UseCase<List<Channel>, ListChannelsUseC
 
     @Override
     public Observable<List<Channel>> createObservable(Request request) {
-        Authenticable auth = mUserRepository.getCurrentUser(new User());
+        Authenticable auth = mUserRepository.fetchCurrentUser(new User());
 
         return mChannelRepository.fetchChannelsBy(auth)
                 .flatMap(Observable::from)
