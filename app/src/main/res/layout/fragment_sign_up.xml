@@ -14,8 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusableInTouchMode="true"
-            android:padding="@dimen/vertical"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/vertical">
 
             <TextView
                 android:id="@+id/text_sign_up"
@@ -40,15 +40,15 @@
                 android:layout_marginBottom="@dimen/large"
                 android:scaleX="0"
                 android:scaleY="0"
-                android:textColorHint="@color/text_primary">
+                style="@style/text_layout_white">
 
                 <EditText
                     android:id="@+id/edit_email"
+                    style="@style/edit_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/msg_email"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/text_primary" />
+                    android:inputType="textEmailAddress" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -59,15 +59,15 @@
                 android:layout_marginBottom="@dimen/large"
                 android:scaleX="0"
                 android:scaleY="0"
-                android:textColorHint="@color/text_primary">
+                style="@style/text_layout_white">
 
                 <EditText
                     android:id="@+id/edit_password"
+                    style="@style/edit_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/msg_password"
-                    android:inputType="textPassword"
-                    android:textColor="@color/text_primary" />
+                    android:inputType="textPassword" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -80,7 +80,6 @@
                 android:layout_gravity="bottom"
                 android:layout_marginTop="@dimen/large"
                 android:contentDescription="@string/action_sign_up"
-                android:textColor="@color/primary_color_dark"
                 android:scaleX="0"
                 android:scaleY="0"
                 android:text="@string/action_sign_up" />

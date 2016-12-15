@@ -1,0 +1,94 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.weverson.speedchat.presentation.addChannel.AddChannelFragment">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <FrameLayout
+                android:id="@+id/frame_add_image"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@color/primary_color_dark">
+
+                <ImageView
+                    android:id="@+id/image_add_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="225dp"
+                    android:layout_gravity="top"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_add_photo" />
+
+                <android.support.design.widget.TextInputLayout
+                    style="@style/text_layout_white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/nano"
+                    android:layout_marginRight="70dp"
+                    android:layout_gravity="bottom">
+
+                    <EditText
+                        style="@style/edit_white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name"
+                        android:paddingTop="@dimen/small" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </FrameLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_add_channel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/xlarge"
+                android:padding="@dimen/small">
+
+                <TextView
+                    android:id="@+id/text_private_channel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="Private Channel"
+                    style="@style/text_white"/>
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/primary_color_dark" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small"
+        android:src="@drawable/ic_add"
+        app:layout_anchor="@id/frame_add_image"
+        app:layout_anchorGravity="bottom|right|end" />
+
+</android.support.design.widget.CoordinatorLayout>

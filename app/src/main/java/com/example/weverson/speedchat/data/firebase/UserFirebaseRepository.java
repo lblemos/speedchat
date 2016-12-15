@@ -1,5 +1,6 @@
 package com.example.weverson.speedchat.data.firebase;
 
+import com.example.weverson.speedchat.data.exception.AuthenticableException;
 import com.example.weverson.speedchat.data.firebase.listeners.FirebaseObservableListeners;
 import com.example.weverson.speedchat.data.repository.UserRepository;
 import com.example.weverson.speedchat.domain.abstraction.Authenticable;
@@ -41,19 +42,27 @@ public class UserFirebaseRepository implements UserRepository {
                 mAuth.signInWithEmailAndPassword(authenticable.getEmail(), authenticable.getPassword())
                         .addOnSuccessListener(v -> subscriber.onCompleted())
                         .addOnFailureListener(subscriber::onError);
+            } else {
+                subscriber.onError(new AuthenticableException("Authenticable not found"));
             }
         });
     }
 
     @Override
-    public Authenticable fetchCurrentUser(Authenticable authenticable) {
+    public Observable<Authenticable> fetchCurrentUser(Authenticable authenticable) {
 
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
-        if (firebaseUser != null) {
-            authenticable.setUid(firebaseUser.getUid());
-            authenticable.setEmail(firebaseUser.getEmail());
-        }
-        return authenticable;
+        return Observable.create(subscriber -> {
+            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+            if (firebaseUser != null) {
+                authenticable.setUid(firebaseUser.getUid());
+                authenticable.setEmail(firebaseUser.getEmail());
+            }
+
+            subscriber.onNext(authenticable);
+            subscriber.onCompleted();
+
+        });
+
     }
 
 }

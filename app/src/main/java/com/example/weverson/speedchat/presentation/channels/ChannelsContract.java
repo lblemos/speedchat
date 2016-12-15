@@ -12,11 +12,15 @@ public interface ChannelsContract {
 
         void displayChannels(List<Channel> channels);
 
+        void openAddChannel();
+
     }
 
     interface Presenter extends BasePresenter {
 
         void listChannels();
+
+        void addChannel();
 
     }
 

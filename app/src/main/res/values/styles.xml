@@ -28,6 +28,7 @@
 
     <style name="button_colored" parent="Widget.AppCompat.Button.Colored">
         <item name="android:padding">@dimen/large</item>
+        <item name="android:textColor">@color/text_secondary</item>
     </style>
 
     <style name="text_item_title_black">
@@ -37,6 +38,14 @@
 
     <style name="text_item_black">
         <item name="android:textSize">@dimen/small_text</item>
+    </style>
+
+    <style name="edit_white">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="text_layout_white">
+        <item name="android:textColorHint">@color/text_primary</item>
     </style>
 
 

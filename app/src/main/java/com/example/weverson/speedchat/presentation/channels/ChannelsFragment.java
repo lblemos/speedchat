@@ -1,8 +1,10 @@
 package com.example.weverson.speedchat.presentation.channels;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,11 +15,13 @@ import android.view.ViewGroup;
 
 import com.example.weverson.speedchat.R;
 import com.example.weverson.speedchat.domain.channel.Channel;
+import com.example.weverson.speedchat.presentation.addChannel.AddChannelActivity;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -26,6 +30,9 @@ public class ChannelsFragment extends Fragment implements ChannelsContract.View 
 
     @BindView(R.id.Recycler_channels)
     RecyclerView mRecyclerChannels;
+
+    @BindView(R.id.floating_add_channel)
+    FloatingActionButton mFloatingAddChannel;
 
 
     private ChannelsContract.Presenter mChannelsPresenter;
@@ -54,6 +61,12 @@ public class ChannelsFragment extends Fragment implements ChannelsContract.View 
     }
 
     @Override
+    public void openAddChannel() {
+        Intent it = new Intent(getContext(), AddChannelActivity.class);
+        startActivity(it);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         mChannelsPresenter.start();
@@ -64,4 +77,8 @@ public class ChannelsFragment extends Fragment implements ChannelsContract.View 
     }
 
 
+    @OnClick(R.id.floating_add_channel)
+    public void onClick() {
+        mChannelsPresenter.addChannel();
+    }
 }

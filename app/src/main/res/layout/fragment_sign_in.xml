@@ -30,40 +30,40 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/text_email"
+                style="@style/text_layout_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/large"
                 android:scaleX="0"
-                android:scaleY="0"
-                android:textColorHint="@color/text_primary">
+                android:scaleY="0">
 
                 <EditText
                     android:id="@+id/edit_email"
+                    style="@style/edit_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/msg_email"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/text_primary"/>
+                    android:inputType="textEmailAddress" />
 
             </android.support.design.widget.TextInputLayout>
 
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/text_password"
+                style="@style/text_layout_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/large"
                 android:scaleX="0"
-                android:scaleY="0"
-                android:textColorHint="@color/text_primary">
+                android:scaleY="0">
 
                 <EditText
                     android:id="@+id/edit_password"
+                    style="@style/edit_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/msg_password"
-                    android:inputType="textPassword"
-                    android:textColor="@color/text_primary"/>
+                    android:inputType="textPassword" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -78,8 +78,7 @@
                 android:contentDescription="@string/action_sign_in"
                 android:scaleX="0"
                 android:scaleY="0"
-                android:text="@string/action_sign_in"
-                android:textColor="@color/text_secondary" />
+                android:text="@string/action_sign_in" />
 
 
             <LinearLayout

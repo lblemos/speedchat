@@ -43,7 +43,10 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void initializeFragment() {
-        if (mFrameSignUp != null) {
+
+        mSignUpFragment = (SignUpFragment) getSupportFragmentManager().findFragmentById(R.id.frame_sign_up);
+
+        if (mFrameSignUp != null && mSignUpFragment == null) {
             mSignUpFragment = new SignUpFragment();
             getSupportFragmentManager()
                     .beginTransaction()

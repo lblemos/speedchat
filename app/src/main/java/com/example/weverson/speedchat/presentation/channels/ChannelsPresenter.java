@@ -37,6 +37,11 @@ class ChannelsPresenter implements ChannelsContract.Presenter {
                 .subscribe(new ChannelsSubscriber());
     }
 
+    @Override
+    public void addChannel() {
+        mChannelsView.openAddChannel();
+    }
+
     private final class ChannelsSubscriber extends Subscriber<List<Channel>>  {
 
         @Override

@@ -65,7 +65,7 @@ public class ChannelsActivity extends AppCompatActivity {
         ActionBar toolbar = getSupportActionBar();
 
         if(toolbar != null) {
-            toolbar.setTitle("Channels");
+            toolbar.setTitle(getString(R.string.title_channels));
         }
 
 

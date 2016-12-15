@@ -33,8 +33,10 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void initializeFragment() {
-        if(mFrameSignIn != null) {
-            mSignInFragment = new SignInFragment();
+        mSignInFragment = (SignInFragment) getSupportFragmentManager().findFragmentById(R.id.frame_sign_in);
+
+        if(mFrameSignIn != null && mSignInFragment == null) {
+            mSignInFragment = SignInFragment.getInstance();
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.frame_sign_in, mSignInFragment)

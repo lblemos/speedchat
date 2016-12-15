@@ -4,6 +4,7 @@ package com.example.weverson.speedchat.presentation.signin;
 import android.support.annotation.NonNull;
 
 import com.example.weverson.speedchat.domain.user.User;
+import com.example.weverson.speedchat.domain.user.interactor.AutoSignInUseCase;
 import com.example.weverson.speedchat.domain.user.interactor.SignInUseCase;
 
 import javax.inject.Inject;
@@ -12,16 +13,17 @@ import rx.Subscriber;
 
 import static com.example.weverson.speedchat.utils.Validation.checkEmpty;
 
-public class SignInPresenter implements SignInContract.Presenter{
+public class SignInPresenter implements SignInContract.Presenter {
 
-    private SignInContract.View mSignInView;
-
-    private SignInUseCase mSignInUseCase;
+    private final SignInContract.View mSignInView;
+    private final SignInUseCase mSignInUseCase;
+    private final AutoSignInUseCase mAutoSignInUseCase;
 
     @Inject
-    public SignInPresenter(SignInContract.View signInView, SignInUseCase signInUseCase) {
+    public SignInPresenter(SignInContract.View signInView, SignInUseCase signInUseCase, AutoSignInUseCase autoSignInUseCase) {
         mSignInView = signInView;
         mSignInUseCase = signInUseCase;
+        mAutoSignInUseCase = autoSignInUseCase;
     }
 
     @Inject
@@ -40,15 +42,15 @@ public class SignInPresenter implements SignInContract.Presenter{
         boolean emailEmpty = checkEmpty(user.getEmail());
         boolean passwordEmpty = checkEmpty(user.getPassword());
 
-        if(emailEmpty){
+        if (emailEmpty) {
             mSignInView.showMessageErrorEmailEmpty();
         }
 
-        if(passwordEmpty) {
+        if (passwordEmpty) {
             mSignInView.showMessageErrorPasswordEmpty();
         }
 
-        if(!emailEmpty && !passwordEmpty) {
+        if (!emailEmpty && !passwordEmpty) {
             mSignInUseCase.execute(new SignInUseCase.Request(user))
                     .subscribe(new SignInSubscriber());
         }
@@ -57,8 +59,8 @@ public class SignInPresenter implements SignInContract.Presenter{
 
     @Override
     public void autoSignIn() {
-        mSignInUseCase.execute(new SignInUseCase.Request())
-                .subscribe(new SignInSubscriber());
+        mAutoSignInUseCase.execute(new SignInUseCase.Request())
+                .subscribe(new AutoSignInSubscriber());
     }
 
     private final class SignInSubscriber extends Subscriber<Void> {
@@ -75,6 +77,24 @@ public class SignInPresenter implements SignInContract.Presenter{
         @Override
         public void onNext(Void aVoid) {
 
+        }
+    }
+
+    private final class AutoSignInSubscriber extends Subscriber<Boolean> {
+        @Override
+        public void onCompleted() {
+
+        }
+
+        @Override
+        public void onError(Throwable e) {
+        }
+
+        @Override
+        public void onNext(Boolean isAuthenticated) {
+            if(isAuthenticated) {
+                mSignInView.openChannels();
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.weverson.speedchat.presentation.signin;
 
+import com.example.weverson.speedchat.domain.user.interactor.AutoSignInUseCase;
 import com.example.weverson.speedchat.domain.user.interactor.SignInUseCase;
 
 import org.junit.Before;
@@ -22,6 +23,9 @@ public class SignInPresenterTest {
     @Mock
     private SignInUseCase mSignInUseCase;
 
+    @Mock
+    private AutoSignInUseCase mAutoSignInUseCase;
+
 
     private SignInPresenter mSignInPresenter;
 
@@ -30,7 +34,7 @@ public class SignInPresenterTest {
 
         initMocks(this);
 
-        mSignInPresenter = new SignInPresenter(mSignInView, mSignInUseCase);
+        mSignInPresenter = new SignInPresenter(mSignInView, mSignInUseCase, mAutoSignInUseCase);
         mSignInPresenter.setupListeners();
 
     }
@@ -67,6 +71,17 @@ public class SignInPresenterTest {
                 .thenReturn(Observable.just(null));
 
         mSignInPresenter.signIn("teste@teste.com", "teste");
+
+        verify(mSignInView).openChannels();
+
+    }
+
+    @Test
+    public void autoSignIn_openActivityChannels() {
+        when(mAutoSignInUseCase.execute(any(SignInUseCase.Request.class)))
+                .thenReturn(Observable.just(true));
+
+        mSignInPresenter.autoSignIn();
 
         verify(mSignInView).openChannels();
 
