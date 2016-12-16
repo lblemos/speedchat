@@ -9,7 +9,7 @@ public class ChannelsModule {
     private ChannelsContract.View mView;
 
     public ChannelsModule(ChannelsContract.View view) {
-        this.mView = view;
+        mView = view;
     }
 
     @Provides

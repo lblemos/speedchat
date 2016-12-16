@@ -34,8 +34,8 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelsAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Channel channel = mChannels.get(position);
-        holder.mTextTitle.setText(channel.getTitle());
-        holder.mTextDescription.setText(channel.getDescription());
+        holder.mTextTitle.setText(channel.getName());
+        holder.mTextDescription.setText(channel.getLastMessage());
 
         Glide
                 .with(holder.itemView.getContext())

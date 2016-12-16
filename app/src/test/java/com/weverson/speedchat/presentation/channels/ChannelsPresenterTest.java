@@ -31,7 +31,6 @@ public class ChannelsPresenterTest {
     @Before
     public void setUp() {
         initMocks(this);
-
         mChannelsPresenter = new ChannelsPresenter(mChannelsView, mListChannelsUseCase);
         mChannelsPresenter.setupListeners();
     }

@@ -14,4 +14,6 @@ public interface ChannelRepository {
 
     Observable<List<String>> fetchChannelsBy(Authenticable authenticable);
 
+    Observable<Boolean> createChannel(Channel channel);
+
 }

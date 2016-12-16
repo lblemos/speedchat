@@ -22,12 +22,14 @@
                 android:focusableInTouchMode="true"
                 android:background="@color/primary_color_dark">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/image_add_photo"
                     android:layout_width="match_parent"
+                    android:background="@color/primary_color_dark"
                     android:layout_height="225dp"
                     android:layout_gravity="top"
                     android:scaleType="center"
+                    android:clickable="true"
                     android:src="@drawable/ic_add_photo_selector" />
 
                 <android.support.design.widget.TextInputLayout
@@ -39,6 +41,7 @@
                     android:layout_gravity="bottom">
 
                     <EditText
+                        android:id="@+id/edit_name"
                         style="@style/edit_white"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -85,10 +88,11 @@
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floating_add_channel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small"
-        android:src="@drawable/ic_send"
+        android:src="@drawable/ic_add"
         app:layout_anchor="@id/frame_add_image"
         app:layout_anchorGravity="bottom|right|end" />
 

@@ -2,37 +2,45 @@ package com.weverson.speedchat.domain.channel;
 
 import android.support.annotation.NonNull;
 
+import com.google.firebase.database.IgnoreExtraProperties;
 
+
+@IgnoreExtraProperties
 public class Channel {
 
-    private String mTitle;
+    private String mName;
 
-    private String mDescription;
+    private String mlastMessage;
 
     private String mImage;
 
+    private String mAdmin;
+
+    private long mTimestamp;
+
     public Channel() {
+
     }
 
-    public Channel(@NonNull String title, @NonNull String description) {
-        mTitle = title;
-        mDescription = description;
+    public Channel(@NonNull String name) {
+        mName = name;
+        mTimestamp = System.currentTimeMillis();
     }
 
-    public String getTitle() {
-        return mTitle;
+    public String getName() {
+        return mName;
     }
 
-    public void setTitle(String title) {
-        mTitle = title;
+    public void setName(String name) {
+        mName = name;
     }
 
-    public String getDescription() {
-        return mDescription;
+    public String getLastMessage() {
+        return mlastMessage;
     }
 
-    public void setDescription(String description) {
-        mDescription = description;
+    public void setLastMessage(String description) {
+        mlastMessage = description;
     }
 
     public String getImage() {
@@ -41,5 +49,17 @@ public class Channel {
 
     public void setImage(String image) {
         mImage = image;
+    }
+
+    public String getAdmin() {
+        return mAdmin;
+    }
+
+    public void setAdmin(String admin) {
+        mAdmin = admin;
+    }
+
+    public long getTimestamp() {
+        return mTimestamp;
     }
 }

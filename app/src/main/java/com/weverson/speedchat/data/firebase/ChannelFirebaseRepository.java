@@ -38,6 +38,12 @@ public class ChannelFirebaseRepository implements ChannelRepository {
         return mFirebaseObservableListeners.listenToSingleValueEvents(channels, toChannels());
     }
 
+    @Override
+    public Observable<Boolean> createChannel(Channel channel) {
+        DatabaseReference databaseReference = mReference.child("channels").child(channel.getName());
+        return mFirebaseObservableListeners.setValue(channel, databaseReference, true);
+    }
+
     private static Func1<DataSnapshot, Channel> toChannel() {
         return dataSnapshot -> {
             Channel channel = null;
