@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.weverson.speedchat">
+    package="com.weverson.speedchat">
 
     <application
         android:name=".MainApplication"
@@ -22,7 +22,8 @@
         <activity android:name=".presentation.channels.ChannelsActivity" />
         <activity
             android:name=".presentation.addChannel.AddChannelActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName=".presentation.channels.ChannelsActivity"/>
     </application>
 
 </manifest>

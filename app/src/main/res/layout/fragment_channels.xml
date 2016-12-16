@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.weverson.speedchat.presentation.channels.ChannelsFragment">
+    tools:context="com.weverson.speedchat.presentation.channels.ChannelsFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/Recycler_channels"
@@ -19,6 +19,6 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="@dimen/small"
         android:src="@drawable/ic_add"
-        app:layout_behavior="com.example.weverson.speedchat.presentation.channels.ChannelScroll" />
+        app:layout_behavior="com.weverson.speedchat.presentation.channels.ChannelScroll" />
 
 </android.support.design.widget.CoordinatorLayout>

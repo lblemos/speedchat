@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.weverson.speedchat.presentation.addChannel.AddChannelFragment">
+    tools:context="com.weverson.speedchat.presentation.addChannel.AddChannelFragment">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -19,6 +19,7 @@
                 android:id="@+id/frame_add_image"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
+                android:focusableInTouchMode="true"
                 android:background="@color/primary_color_dark">
 
                 <ImageView
@@ -27,7 +28,7 @@
                     android:layout_height="225dp"
                     android:layout_gravity="top"
                     android:scaleType="center"
-                    android:src="@drawable/ic_add_photo" />
+                    android:src="@drawable/ic_add_photo_selector" />
 
                 <android.support.design.widget.TextInputLayout
                     style="@style/text_layout_white"
@@ -87,7 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_send"
         app:layout_anchor="@id/frame_add_image"
         app:layout_anchorGravity="bottom|right|end" />
 
