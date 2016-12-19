@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 import rx.Subscriber;
 
-public class AddChannelPresenter implements AddChannelContract.Presenter{
+public class AddChannelPresenter implements AddChannelContract.Presenter {
 
     private AddChannelContract.View mAddChannelView;
 
@@ -23,7 +23,7 @@ public class AddChannelPresenter implements AddChannelContract.Presenter{
     }
 
     @Inject
-    void setupListeners(){
+    void setupListeners() {
         mAddChannelView.setPresenter(this);
     }
 
@@ -38,15 +38,20 @@ public class AddChannelPresenter implements AddChannelContract.Presenter{
     }
 
     @Override
-    public void createNewChannel(@NonNull String name, String image) {
-        Channel channel = new Channel(name);
-        channel.setImage(image);
-        mCreateChannelUseCase.execute(new CreateChannelUseCase.Request(channel))
-        .subscribe(new CreateChannelSubscriber());
+    public void createNewChannel(@NonNull String name,@NonNull boolean isPrivate, String image) {
+        Channel channel = new Channel(name).setPrivate(isPrivate).setImage(image);
+
+        if (channel.getName().isEmpty()) {
+            mAddChannelView.showMessageErrorNameEmpty();
+        } else {
+            mCreateChannelUseCase.execute(new CreateChannelUseCase.Request(channel))
+                    .subscribe(new CreateChannelSubscriber());
+        }
+
 
     }
 
-    private final class CreateChannelSubscriber extends Subscriber<Boolean>{
+    private final class CreateChannelSubscriber extends Subscriber<Boolean> {
 
         @Override
         public void onCompleted() {
@@ -60,11 +65,9 @@ public class AddChannelPresenter implements AddChannelContract.Presenter{
 
         @Override
         public void onNext(Boolean success) {
-
-            if(success) {
+            if (success) {
                 mAddChannelView.openChannels();
             }
-
         }
     }
 }

@@ -7,6 +7,7 @@ import com.weverson.speedchat.domain.abstraction.Authenticable;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.weverson.speedchat.domain.channel.Channel;
 
 import javax.inject.Inject;
 
@@ -63,6 +64,13 @@ public class UserFirebaseRepository implements UserRepository {
 
         });
 
+    }
+
+    @Override
+    public Observable<Boolean> addChannel(Channel channel) {
+        DatabaseReference reference = mReference.child("users").child(channel.getAdmin())
+                .child("channels").child(channel.getId());
+        return mFirebaseObservableListeners.setValue(true, reference, true);
     }
 
 }

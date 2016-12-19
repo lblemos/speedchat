@@ -27,8 +27,8 @@ public class ChannelFirebaseRepository implements ChannelRepository {
 
 
     @Override
-    public Observable<Channel> fetchChannelBy(String channelName) {
-        Query query = mReference.child("channels").orderByKey().equalTo(channelName);
+    public Observable<Channel> fetchChannelBy(String channelId) {
+        Query query = mReference.child("channels").child(channelId);
         return mFirebaseObservableListeners.listenToSingleValueEvents(query, toChannel());
     }
 
@@ -39,18 +39,16 @@ public class ChannelFirebaseRepository implements ChannelRepository {
     }
 
     @Override
-    public Observable<Boolean> createChannel(Channel channel) {
-        DatabaseReference databaseReference = mReference.child("channels").child(channel.getName());
-        return mFirebaseObservableListeners.setValue(channel, databaseReference, true);
+    public Observable<Channel> createChannel(Channel channel) {
+        DatabaseReference databaseReference = mReference.child("channels").child(channel.getId());
+        return mFirebaseObservableListeners.setValue(channel, databaseReference, channel);
     }
 
     private static Func1<DataSnapshot, Channel> toChannel() {
         return dataSnapshot -> {
             Channel channel = null;
             if (dataSnapshot.hasChildren()) {
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    channel = data.getValue(Channel.class);
-                }
+                channel = dataSnapshot.getValue(Channel.class);
             }
             return channel;
         };

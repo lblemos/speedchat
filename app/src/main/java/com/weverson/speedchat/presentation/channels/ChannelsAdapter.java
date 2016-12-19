@@ -58,7 +58,7 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelsAdapter.ViewHo
         @BindView(R.id.text_title)
         TextView mTextTitle;
 
-        @BindView(R.id.text_description)
+        @BindView(R.id.text_last_message)
         TextView mTextDescription;
 
         @BindView(R.id.image_channel)

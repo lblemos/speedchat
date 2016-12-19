@@ -1,8 +1,6 @@
 package com.weverson.speedchat.presentation.addChannel;
 
 
-import android.graphics.Bitmap;
-
 import com.weverson.speedchat.domain.channel.interactor.CreateChannelUseCase;
 
 import org.junit.Before;
@@ -12,7 +10,6 @@ import org.mockito.Mock;
 import rx.Observable;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -30,25 +27,34 @@ public class AddChannelPresenterTest {
     @Before
     public void setUp() {
         initMocks(this);
-        mAddChannelPresenter = new AddChannelPresenter(mAddChannelView);
+        mAddChannelPresenter = new AddChannelPresenter(mAddChannelView, mCreateChannelUseCase);
         mAddChannelPresenter.setupListeners();
     }
 
     @Test
-    public void selectImage_showSelectImage(){
+    public void selectImage_showSelectImage() {
         mAddChannelPresenter.selectImage();
         verify(mAddChannelView).showSelectImage();
     }
 
     @Test
-    public void createNewChanel_showChannelsUi(){
+    public void createNewChanel_showChannelsUi() {
 
         when(mCreateChannelUseCase.execute(any(CreateChannelUseCase.Request.class)))
-                .thenReturn(Observable.empty());
+                .thenReturn(Observable.just(true));
 
-        mAddChannelPresenter.createNewChannel(anyString(), any(Bitmap.class));
+        mAddChannelPresenter.createNewChannel("channel name", false, "image path");
 
         verify(mAddChannelView).openChannels();
+
+    }
+
+    @Test
+    public void createNewChannel_showMessageErrorNameEmpty() {
+
+        mAddChannelPresenter.createNewChannel("", false, "image path");
+
+        verify(mAddChannelView).showMessageErrorNameEmpty();
 
     }
 

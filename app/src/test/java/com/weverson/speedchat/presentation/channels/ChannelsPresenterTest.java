@@ -39,8 +39,8 @@ public class ChannelsPresenterTest {
     public void getChannels_listChannelsInUi() {
 
         List<Channel> lists = new ArrayList<>();
-        lists.add(new Channel("Title1", "Description1"));
-        lists.add(new Channel("Title2", "Description2"));
+        lists.add(new Channel("Title1"));
+        lists.add(new Channel("Title2"));
 
         when(mListChannelsUseCase.execute(any(ListChannelsUseCase.Request.class)))
                 .thenReturn(Observable.just(lists));

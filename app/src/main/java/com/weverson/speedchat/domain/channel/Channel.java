@@ -4,62 +4,90 @@ import android.support.annotation.NonNull;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
 
 @IgnoreExtraProperties
-public class Channel {
+public class Channel implements Serializable {
 
-    private String mName;
+    private String id;
 
-    private String mlastMessage;
+    private String name;
 
-    private String mImage;
+    private boolean isPrivate;
 
-    private String mAdmin;
+    private String lastMessage;
 
-    private long mTimestamp;
+    private String image;
+
+    private String admin;
+
+    private long timestamp;
 
     public Channel() {
 
     }
 
     public Channel(@NonNull String name) {
-        mName = name;
-        mTimestamp = System.currentTimeMillis();
+        setName(name);
+        setId(name);
+        timestamp = System.currentTimeMillis();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Channel setId(String id) {
+        this.id = id;
+        return this;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
-    public void setName(String name) {
-        mName = name;
+    public Channel setName(String name) {
+        this.name = name;
+        return this;
     }
 
     public String getLastMessage() {
-        return mlastMessage;
+        return lastMessage;
     }
 
-    public void setLastMessage(String description) {
-        mlastMessage = description;
+    public Channel setLastMessage(String description) {
+        lastMessage = description;
+        return this;
     }
 
     public String getImage() {
-        return mImage;
+        return image;
     }
 
-    public void setImage(String image) {
-        mImage = image;
+    public Channel setImage(String image) {
+        this.image = image;
+        return this;
     }
 
     public String getAdmin() {
-        return mAdmin;
+        return admin;
     }
 
-    public void setAdmin(String admin) {
-        mAdmin = admin;
+    public Channel setAdmin(String admin) {
+        this.admin = admin;
+        return this;
     }
 
     public long getTimestamp() {
-        return mTimestamp;
+        return timestamp;
+    }
+
+    public Channel setPrivate(boolean isPrivate) {
+        this.isPrivate = isPrivate;
+        return this;
+    }
+
+    public boolean isPrivate() {
+        return isPrivate;
     }
 }

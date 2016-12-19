@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:padding="@dimen/small">
 
@@ -13,31 +13,40 @@
         android:layout_height="@dimen/image_item_size"
         android:layout_marginEnd="@dimen/micro"
         android:layout_marginRight="@dimen/micro"
-        app:civ_border_color="@color/color_accent"
-        app:civ_border_width="2dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_channels" />
+        android:src="@drawable/ic_channels"
+        app:civ_border_color="@color/color_accent"
+        app:civ_border_width="2dp" />
 
 
     <TextView
         android:id="@+id/text_title"
         style="@style/text_item_title_black"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
         android:layout_marginTop="@dimen/nano"
+        android:layout_toEndOf="@+id/image_channel"
         android:layout_toRightOf="@+id/image_channel"
-        android:layout_toEndOf="@+id/image_channel" />
+        android:text="Title" />
 
     <TextView
-        android:id="@+id/text_description"
-        style="@style/text_item_black"
-        android:layout_width="match_parent"
+        android:id="@+id/text_last_message"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description for channel"
         android:layout_below="@+id/text_title"
+        android:layout_toEndOf="@+id/image_channel"
         android:layout_toRightOf="@+id/image_channel"
-        android:layout_toEndOf="@+id/image_channel" />
+        android:text="Last message for channel" />
+
+    <TextView
+        android:id="@+id/text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_title"
+        android:layout_alignBottom="@+id/text_title"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="00:00" />
 
 
 </RelativeLayout>

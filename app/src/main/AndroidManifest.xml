@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.weverson.speedchat">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
@@ -10,11 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".presentation.signin.SignInActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".presentation.signup.SignUpActivity"
@@ -22,11 +22,19 @@
         <activity android:name=".presentation.channels.ChannelsActivity" />
         <activity
             android:name=".presentation.addChannel.AddChannelActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:parentActivityName=".presentation.channels.ChannelsActivity"/>
-    </application>
+            android:parentActivityName=".presentation.channels.ChannelsActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".presentation.messages.MessagesActivity"
+            android:parentActivityName=".presentation.channels.ChannelsActivity"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-    <uses-feature android:name="android.hardware.camera"
-        android:required="true" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+    </application>
 
 </manifest>

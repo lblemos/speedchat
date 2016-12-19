@@ -11,7 +11,7 @@ public interface AddChannelContract {
 
         void selectImage();
 
-        void createNewChannel(@NonNull String name, String image);
+        void createNewChannel(@NonNull String name, @NonNull boolean isPrivate, String image);
 
     }
 
@@ -20,6 +20,8 @@ public interface AddChannelContract {
         void showSelectImage();
 
         void openChannels();
+
+        void showMessageErrorNameEmpty();
 
     }
 

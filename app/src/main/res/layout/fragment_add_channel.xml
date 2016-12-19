@@ -19,30 +19,29 @@
                 android:id="@+id/frame_add_image"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:focusableInTouchMode="true"
-                android:background="@color/primary_color_dark">
+                android:background="@color/primary_color_dark"
+                android:focusableInTouchMode="true">
 
                 <ImageButton
                     android:id="@+id/image_add_photo"
                     android:layout_width="match_parent"
-                    android:background="@color/primary_color_dark"
                     android:layout_height="225dp"
                     android:layout_gravity="top"
-                    android:scaleType="center"
+                    android:background="@color/primary_color_dark"
                     android:clickable="true"
+                    android:scaleType="center"
                     android:src="@drawable/ic_add_photo_selector" />
 
                 <android.support.design.widget.TextInputLayout
-                    style="@style/text_layout_white"
+                    android:id="@+id/text_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/nano"
+                    android:layout_gravity="bottom"
                     android:layout_marginRight="70dp"
-                    android:layout_gravity="bottom">
+                    android:padding="@dimen/nano">
 
                     <EditText
                         android:id="@+id/edit_name"
-                        style="@style/edit_white"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Name"
@@ -56,20 +55,21 @@
                 android:id="@+id/relative_add_channel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/xlarge"
+                android:layout_marginTop="@dimen/x_large"
                 android:padding="@dimen/small">
 
                 <TextView
                     android:id="@+id/text_private_channel"
+                    style="@style/text_white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:text="Private Channel"
-                    style="@style/text_white"/>
+                    android:text="Private Channel" />
 
                 <Switch
+                    android:id="@+id/switch_private"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Speed Chat</string>
+
     <string name="title_sign_up">Create New Account</string>
     <string name="title_add_channel">Create New Channel</string>
+    <string name="title_channels">Channels</string>
+
     <string name="msg_sign_in">sign in</string>
     <string name="msg_nickname">Nickname</string>
     <string name="msg_email">E-mail</string>
@@ -11,18 +14,21 @@
     <string name="msg_can_not_have_an_account">Can\'t have an account?</string>
     <string name="msg_sign_up">Sign up</string>
     <string name="msg_create_account_success">Account created with success!!!</string>
-    <string name="msg_name_empty">The name can not be empty</string>
+    <string name="msg_select_image">Select an image</string>
+
+    <string name="error_name_empty">The name can not be empty</string>
     <string name="error_email_empty">The email can not be empty</string>
     <string name="error_password_empty">The password can not be empty</string>
     <string name="error_email_invalid">The email not valid</string>
     <string name="error_confirm_password_empty">The Confirm password can not be empty</string>
     <string name="error_passwords_same">The passwords are not the same</string>
+
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_up">Sign Up</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_channels">Channels</string>
-    <string name="msg_select_image">Select an image</string>
+    <string name="title_messages">Messages</string>
+    <string name="msg_type_here">Type here...</string>
 
 </resources>

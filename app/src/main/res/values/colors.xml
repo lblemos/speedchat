@@ -6,4 +6,6 @@
     <color name="color_accent">#FFF600</color>
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#101010</color>
+    <color name="black">#101010</color>
+    <color name="gray">#AAAAAA</color>
 </resources>

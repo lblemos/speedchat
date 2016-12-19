@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -34,13 +36,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AddChannelFragment extends Fragment implements AddChannelContract.View {
 
-    static final int REQUEST_IMAGE_OPEN = 1;
+    private static final int REQUEST_IMAGE_OPEN = 1;
+    private static final String TAG = AddChannelFragment.class.getSimpleName();
 
     @BindView(R.id.image_add_photo)
     ImageButton mImageAddPhoto;
 
     @BindView(R.id.edit_name)
-    EditText mTextName;
+    EditText mEditName;
 
     @BindView(R.id.frame_add_image)
     FrameLayout frameAddImage;
@@ -50,6 +53,9 @@ public class AddChannelFragment extends Fragment implements AddChannelContract.V
 
     @BindView(R.id.floating_add_channel)
     FloatingActionButton mFloatingAddChannel;
+
+    @BindView(R.id.switch_private)
+    Switch mSwitchPrivate;
 
     private AddChannelContract.Presenter mAddChannelPresenter;
 
@@ -93,6 +99,11 @@ public class AddChannelFragment extends Fragment implements AddChannelContract.V
     }
 
     @Override
+    public void showMessageErrorNameEmpty() {
+        mEditName.setError(getString(R.string.error_name_empty));
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_OPEN && resultCode == RESULT_OK) {
 
@@ -120,9 +131,8 @@ public class AddChannelFragment extends Fragment implements AddChannelContract.V
 
     @OnClick(R.id.floating_add_channel)
     public void addChannel() {
-        mAddChannelPresenter.createNewChannel(getName(), getImage());
+        mAddChannelPresenter.createNewChannel(getName(), isPrivate(), getImage());
     }
-
 
     private final class selectImageOnTouchListener implements View.OnTouchListener {
 
@@ -144,11 +154,20 @@ public class AddChannelFragment extends Fragment implements AddChannelContract.V
     }
 
     private String getName() {
-        return mTextName.getText().toString();
+        return mEditName.getText().toString();
     }
 
     private String getImage() {
-        Bitmap bitmap = ((BitmapDrawable) mImageAddPhoto.getDrawable()).getBitmap();
-        return FileCache.saveImageInTemp(bitmap).toString();
+        try {
+            Bitmap bitmap = ((BitmapDrawable) mImageAddPhoto.getDrawable()).getBitmap();
+            return FileCache.saveImageInTemp(bitmap).toString();
+        } catch (ClassCastException e) {
+            Log.i(TAG, "the image is null");
+        }
+        return null;
+    }
+
+    private boolean isPrivate() {
+        return mSwitchPrivate.isChecked();
     }
 }

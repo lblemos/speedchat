@@ -16,13 +16,13 @@ import rx.Observable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class CreateChannelUseCase extends UseCase<Boolean, CreateChannelUseCase.Request>{
+public class CreateChannelUseCase extends UseCase<Boolean, CreateChannelUseCase.Request> {
 
     private ChannelRepository mChannelRepository;
     private UserRepository mUserRepository;
 
     @Inject
-    public CreateChannelUseCase(@Firebase UserRepository userRepository, @Firebase ChannelRepository channelRepository ){
+    public CreateChannelUseCase(@Firebase UserRepository userRepository, @Firebase ChannelRepository channelRepository) {
         mUserRepository = userRepository;
         mChannelRepository = channelRepository;
     }
@@ -34,10 +34,10 @@ public class CreateChannelUseCase extends UseCase<Boolean, CreateChannelUseCase.
                     Channel channel = request.getChannel();
                     channel.setAdmin(authenticable.getUid());
                     return mChannelRepository.createChannel(channel);
-                });
+                }).flatMap(mUserRepository::addChannel);
     }
 
-    public static class Request extends UseCase.Request {
+    public static final class Request extends UseCase.Request {
 
         private Channel mChannel;
 
