@@ -7,11 +7,14 @@ import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 
 import com.weverson.speedchat.R;
+import com.weverson.speedchat.domain.channel.Channel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MessagesActivity extends AppCompatActivity {
+
+    public static final String EXTRA_CHANNEL = "com.weverson.speedchat.extras.EXTRA_CHANNEL";
 
     @BindView(R.id.frame_messages)
     FrameLayout mFrameMessages;
@@ -48,6 +51,7 @@ public class MessagesActivity extends AppCompatActivity {
 
     private void initializeToolbar() {
 
+        Channel channel = (Channel) getIntent().getSerializableExtra(EXTRA_CHANNEL);
         setSupportActionBar(mToolbarMessages);
         ActionBar toolbar = getSupportActionBar();
 
@@ -55,7 +59,10 @@ public class MessagesActivity extends AppCompatActivity {
             toolbar.setDisplayHomeAsUpEnabled(true);
             toolbar.setDisplayShowHomeEnabled(true);
             toolbar.setTitle(getString(R.string.title_messages));
-            toolbar.setSubtitle("channel");
+            if (channel != null && channel.getName() != null) {
+                toolbar.setSubtitle(channel.getName());
+            }
+
         }
 
     }

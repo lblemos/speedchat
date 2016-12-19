@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.weverson.speedchat.R;
 import com.weverson.speedchat.domain.channel.Channel;
 import com.weverson.speedchat.presentation.addChannel.AddChannelActivity;
+import com.weverson.speedchat.presentation.messages.MessagesActivity;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class ChannelsFragment extends Fragment implements ChannelsContract.View {
+public class ChannelsFragment extends Fragment implements ChannelsContract.View, ChannelsAdapter.OnClickChannel {
 
     @BindView(R.id.Recycler_channels)
     RecyclerView mRecyclerChannels;
@@ -54,7 +55,7 @@ public class ChannelsFragment extends Fragment implements ChannelsContract.View 
     @Override
     public void displayChannels(List<Channel> channels) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        ChannelsAdapter channelsAdapter = new ChannelsAdapter(channels);
+        ChannelsAdapter channelsAdapter = new ChannelsAdapter(channels, this);
         mRecyclerChannels.setLayoutManager(linearLayoutManager);
         mRecyclerChannels.setAdapter(new AlphaInAnimationAdapter(channelsAdapter));
         mRecyclerChannels.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
@@ -80,5 +81,12 @@ public class ChannelsFragment extends Fragment implements ChannelsContract.View 
     @OnClick(R.id.floating_add_channel)
     public void onClick() {
         mChannelsPresenter.addChannel();
+    }
+
+    @Override
+    public void openChannel(Channel channel) {
+        Intent it = new Intent(getContext(), MessagesActivity.class);
+        it.putExtra(MessagesActivity.EXTRA_CHANNEL, channel);
+        startActivity(it);
     }
 }

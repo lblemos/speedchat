@@ -20,9 +20,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ChannelsAdapter extends RecyclerView.Adapter<ChannelsAdapter.ViewHolder> {
 
     private List<Channel> mChannels;
+    private OnClickChannel mOnClickChannel;
 
-    public ChannelsAdapter(List<Channel> channels) {
+    public ChannelsAdapter(List<Channel> channels, OnClickChannel onClickChannel) {
         mChannels = channels;
+        mOnClickChannel = onClickChannel;
     }
 
     @Override
@@ -34,6 +36,7 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelsAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Channel channel = mChannels.get(position);
+        holder.itemView.setOnClickListener(v -> mOnClickChannel.openChannel(channel));
         holder.mTextTitle.setText(channel.getName());
         holder.mTextDescription.setText(channel.getLastMessage());
 
@@ -68,6 +71,12 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelsAdapter.ViewHo
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public interface OnClickChannel {
+
+        void openChannel(Channel channel);
+
     }
 
 }

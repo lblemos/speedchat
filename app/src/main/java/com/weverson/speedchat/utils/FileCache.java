@@ -24,6 +24,7 @@ public class FileCache {
             file = File.createTempFile(name, ".png", null);
             out = new FileOutputStream(file);
             image.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            file.deleteOnExit();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
