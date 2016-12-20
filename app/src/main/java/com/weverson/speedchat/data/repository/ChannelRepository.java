@@ -10,7 +10,7 @@ import rx.Observable;
 
 public interface ChannelRepository {
 
-    Observable<Channel> fetchChannelBy(String channel);
+    Observable<Channel> fetchChannelBy(String channelId);
 
     Observable<List<String>> fetchChannelsBy(Authenticable authenticable);
 

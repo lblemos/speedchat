@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/small"
+    android:orientation="horizontal">
+
+
+    <ImageView
+        android:id="@+id/image_profile"
+        android:layout_width="@dimen/image_item_size"
+        android:layout_height="@dimen/image_item_size"
+        android:layout_margin="@dimen/nano" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_messages"
+        android:layout_gravity="bottom"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/nano">
+
+        <TextView
+            android:id="@+id/text_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/nano"
+            android:text="What are you doing here"
+            android:textColor="@color/textColorSecondary" />
+
+    </android.support.v7.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/text_created_at"
+        android:layout_width="0dp"
+        android:layout_weight="0.2"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end|right"
+        android:layout_marginBottom="4dp"
+        android:text="00:00"/>
+
+</LinearLayout>

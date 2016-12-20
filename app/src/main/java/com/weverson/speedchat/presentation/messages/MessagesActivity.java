@@ -6,8 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 
+import com.weverson.speedchat.MainApplication;
 import com.weverson.speedchat.R;
 import com.weverson.speedchat.domain.channel.Channel;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +25,9 @@ public class MessagesActivity extends AppCompatActivity {
     @BindView(R.id.toolbar_messages)
     Toolbar mToolbarMessages;
 
+    @Inject
+    MessagesPresenter mMessagesPresenter;
+
     private MessagesFragment mMessagesFragment;
 
     @Override
@@ -30,6 +36,7 @@ public class MessagesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_messages);
         ButterKnife.bind(this);
         initializeFragment();
+        initializeDagger();
         initializeToolbar();
 
     }
@@ -48,6 +55,15 @@ public class MessagesActivity extends AppCompatActivity {
 
     }
 
+    private void initializeDagger() {
+
+        DaggerMessagesComponent.builder()
+                .mainComponent(((MainApplication) getApplication()).getMainComponent())
+                .repositoryComponent(((MainApplication) getApplication()).getRepositoryComponent())
+                .messagesModule(new MessagesModule(mMessagesFragment)).build()
+                .inject(this);
+
+    }
 
     private void initializeToolbar() {
 

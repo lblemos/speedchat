@@ -1,12 +1,13 @@
 package com.weverson.speedchat.data.firebase;
 
-import com.weverson.speedchat.utils.dagger.qualifier.Firebase;
-import com.weverson.speedchat.data.firebase.listeners.FirebaseObservableListeners;
-import com.weverson.speedchat.data.repository.ChannelRepository;
-import com.weverson.speedchat.data.repository.UserRepository;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.weverson.speedchat.data.firebase.listeners.FirebaseObservableListeners;
+import com.weverson.speedchat.data.repository.ChannelRepository;
+import com.weverson.speedchat.data.repository.MessageRepository;
+import com.weverson.speedchat.data.repository.UserRepository;
+import com.weverson.speedchat.utils.dagger.qualifier.Firebase;
 
 import dagger.Module;
 import dagger.Provides;
@@ -41,6 +42,13 @@ public class RepositoryFirebaseModule {
     ChannelRepository providerChannelFirebaseRepository(DatabaseReference databaseReference,
                                                         FirebaseObservableListeners firebaseObservableListeners) {
         return new ChannelFirebaseRepository(databaseReference, firebaseObservableListeners);
+    }
+
+    @Provides
+    @Firebase
+    MessageRepository providerMessageFirebaseRepository(DatabaseReference databaseReference,
+                                                        FirebaseObservableListeners firebaseObservableListeners) {
+        return new MessageFirebaseRepository(databaseReference, firebaseObservableListeners);
     }
 
 }

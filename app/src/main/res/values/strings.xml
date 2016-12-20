@@ -30,5 +30,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_messages">Messages</string>
     <string name="msg_type_here">Type here...</string>
+    <string name="msg_channel_no_messages">This channel has no messages</string>
 
 </resources>

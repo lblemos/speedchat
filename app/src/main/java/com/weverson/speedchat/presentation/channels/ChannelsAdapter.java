@@ -1,13 +1,16 @@
 package com.weverson.speedchat.presentation.channels;
 
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.weverson.speedchat.R;
 import com.weverson.speedchat.domain.channel.Channel;
 
@@ -15,7 +18,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.weverson.speedchat.utils.ImageGenerator.generateImage;
+import static com.weverson.speedchat.utils.ImageGenerator.generateImageCircle;
 
 public class ChannelsAdapter extends RecyclerView.Adapter<ChannelsAdapter.ViewHolder> {
 
@@ -38,7 +43,10 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelsAdapter.ViewHo
         Channel channel = mChannels.get(position);
         holder.itemView.setOnClickListener(v -> mOnClickChannel.openChannel(channel));
         holder.mTextTitle.setText(channel.getName());
-        holder.mTextDescription.setText(channel.getLastMessage());
+
+        if (channel.getLastMessage() != null) {
+            holder.mTextDescription.setText(channel.getLastMessage());
+        }
 
         Glide
                 .with(holder.itemView.getContext())
@@ -46,8 +54,14 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelsAdapter.ViewHo
                 .asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
-                .placeholder(R.drawable.ic_channels)
-                .into(holder.mImageChannel);
+                .placeholder(generateImage(channel.getName().substring(0, 1)))
+                .into(new BitmapImageViewTarget(holder.mImageChannel) {
+                    @Override
+                    protected void setResource(Bitmap image) {
+                        holder.mImageChannel.setImageDrawable(
+                                generateImageCircle(holder.itemView.getContext(), image));
+                    }
+                });
 
     }
 
@@ -65,7 +79,7 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelsAdapter.ViewHo
         TextView mTextDescription;
 
         @BindView(R.id.image_channel)
-        CircleImageView mImageChannel;
+        ImageView mImageChannel;
 
         public ViewHolder(View itemView) {
             super(itemView);

@@ -7,8 +7,10 @@
     tools:context="com.weverson.speedchat.presentation.messages.MessagesFragment">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_messages"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
         android:clipToPadding="true"
         android:paddingBottom="50dp">
 
@@ -19,16 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/colorPrimary"
         android:minHeight="60dp">
-
-        <ImageButton
-            android:id="@+id/image_emoji"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="@dimen/nano"
-            android:background="@drawable/ic_action_emoji" />
 
         <EditText
             android:id="@+id/main_activity_chat_bottom_message_edittext"
@@ -39,6 +32,7 @@
             android:layout_marginLeft="@dimen/nano"
             android:layout_marginRight="@dimen/x_margin"
             android:layout_marginStart="@dimen/nano"
+            android:layout_marginBottom="4dp"
             android:hint="@string/msg_type_here"
             android:inputType="textMultiLine"
             android:maxHeight="100dp"

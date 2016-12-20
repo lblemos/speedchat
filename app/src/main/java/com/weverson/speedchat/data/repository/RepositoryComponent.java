@@ -13,4 +13,7 @@ public interface RepositoryComponent {
     @Firebase
     ChannelRepository getChannelRepository();
 
+    @Firebase
+    MessageRepository getMessageRepository();
+
 }

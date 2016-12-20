@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="@dimen/small">
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/image_channel"
         android:layout_width="@dimen/image_item_size"
         android:layout_height="@dimen/image_item_size"
         android:layout_marginEnd="@dimen/micro"
         android:layout_marginRight="@dimen/micro"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_channels"
-        app:civ_border_color="@color/colorAccent"
-        app:civ_border_width="2dp" />
-
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/text_title"
@@ -35,7 +30,7 @@
         android:layout_below="@+id/text_title"
         android:layout_toEndOf="@+id/image_channel"
         android:layout_toRightOf="@+id/image_channel"
-        android:text="Last message for channel" />
+        android:text="@string/msg_channel_no_messages" />
 
     <TextView
         android:id="@+id/text_date"
