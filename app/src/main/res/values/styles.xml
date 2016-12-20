@@ -3,38 +3,20 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary_color</item>
-        <item name="colorPrimaryDark">@color/primary_color_dark</item>
-        <item name="colorAccent">@color/color_accent</item>
-        <item name="android:textColorSecondary">@color/text_secondary</item>
-        <item name="android:textColorPrimary">@color/text_primary</item>
-        <item name="android:windowBackground">@color/primary_color</item>
-        <item name="android:textColor">@color/text_primary</item>
-        <item name="android:textColorHint">@color/text_primary</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="android:textColor">@color/textColorSecondary</item>
+        <item name="android:textColorHint">@color/textColorPrimary</item>
     </style>
 
     <style name="link">
-        <item name="android:textColor">@color/color_accent</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/small_text</item>
         <item name="android:clickable">true</item>
     </style>
 
-    <style name="text_white">
-        <item name="android:textSize">@dimen/small_text</item>
-    </style>
-
-    <style name="text_title_white">
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textSize">@dimen/large_text</item>
-    </style>
-
-    <style name="button_colored" parent="Widget.AppCompat.Button.Colored">
-        <item name="android:padding">@dimen/large</item>
-        <item name="android:textColor">@color/text_secondary</item>
-    </style>
-
-    <style name="text_item_title_black">
-        <item name="android:textSize">@dimen/small_text</item>
-        <item name="android:textStyle">bold</item>
-    </style>
 </resources>

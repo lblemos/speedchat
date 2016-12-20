@@ -11,18 +11,15 @@ import com.weverson.speedchat.R;
 
 public class MessagesFragment extends Fragment {
 
-
-    public MessagesFragment() {
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_messages, container, false);
+        View view = inflater.inflate(R.layout.fragment_messages, container, false);
+        return view;
     }
 
     public static MessagesFragment getInstance() {
         return new MessagesFragment();
     }
+
 }
