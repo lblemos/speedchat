@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.weverson.speedchat.R;
 import com.weverson.speedchat.domain.channel.Channel;
 import com.weverson.speedchat.domain.message.Message;
+import com.weverson.speedchat.domain.user.User;
 
 import java.util.List;
 
@@ -54,9 +55,9 @@ public class MessagesFragment extends Fragment implements MessagesContract.View 
     }
 
     @Override
-    public void displayMessage(List<Message> message) {
+    public void displayMessage(List<Message> message, User user) {
 
-        MessagesAdapter adapter = new MessagesAdapter(message);
+        MessagesAdapter adapter = new MessagesAdapter(message, user);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setReverseLayout(true);
         mRecyclerMessages.setLayoutManager(linearLayoutManager);

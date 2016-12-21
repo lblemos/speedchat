@@ -2,6 +2,7 @@ package com.weverson.speedchat.presentation.messages;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.weverson.speedchat.R;
 import com.weverson.speedchat.domain.message.Message;
+import com.weverson.speedchat.domain.user.User;
 
 import java.util.List;
 
@@ -28,14 +30,18 @@ import static com.weverson.speedchat.utils.ImageGenerator.generateImageCircle;
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHolder> {
 
     private List<Message> mMessages;
+    private User mCurrentUser;
 
-    public MessagesAdapter(List<Message> messages) {
+    public MessagesAdapter(List<Message> messages, User user) {
         mMessages = messages;
+        mCurrentUser = user;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message, parent, false);
+
+
         return new ViewHolder(item);
     }
 
@@ -44,6 +50,11 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
         Message message = mMessages.get(position);
         Context context = holder.itemView.getContext();
         TextDrawable placeholderImage = generateImage(message.getName().substring(0, 1));
+
+        if(isCurrentUser(message.getSender())){
+            holder.itemView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            holder.mCardMessage.setCardBackgroundColor(Color.parseColor("#FFE57F"));
+        }
 
         holder.mTextMessage.setText(message.getMessage());
         holder.mTextCratedAt.setText(message.getCreatedAt());
@@ -67,6 +78,10 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
     @Override
     public int getItemCount() {
         return mMessages.size();
+    }
+
+    private boolean isCurrentUser(String uid){
+        return mCurrentUser.getUid().equals(uid);
     }
 
     public static final class ViewHolder extends RecyclerView.ViewHolder {

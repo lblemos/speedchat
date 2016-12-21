@@ -1,52 +1,47 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.weverson.speedchat.presentation.messages.MessagesFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_messages"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
         android:clipToPadding="true"
-        android:paddingBottom="50dp">
+        android:paddingBottom="50dp"
+        android:scrollbars="vertical" />
 
-    </android.support.v7.widget.RecyclerView>
-
-    <LinearLayout
-        android:id="@+id/card_messages"
+    <FrameLayout
+        android:id="@+id/frame_messages"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:minHeight="60dp">
+        android:background="@color/black"
+        android:layout_alignParentBottom="true">
 
         <EditText
-            android:id="@+id/main_activity_chat_bottom_message_edittext"
+            android:id="@+id/edit_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/nano"
             android:layout_marginEnd="@dimen/x_margin"
-            android:layout_marginLeft="@dimen/nano"
-            android:layout_marginRight="@dimen/x_margin"
             android:layout_marginStart="@dimen/nano"
-            android:layout_marginBottom="4dp"
-            android:hint="@string/msg_type_here"
-            android:inputType="textMultiLine"
-            android:maxHeight="100dp"
+            android:layout_marginTop="@dimen/nano"
+            android:layout_gravity="bottom"
+            android:hint="@string/msg_enter_the_message"
+            android:maxLines="3"
             android:scrollbars="vertical" />
 
-    </LinearLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floating_add_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|end|bottom"
+            android:layout_margin="@dimen/nano"
+            android:src="@drawable/ic_send"
+            app:fabSize="mini" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/nano"
-        android:src="@drawable/ic_send"
-        app:fabSize="mini"
-        app:layout_anchor="@id/card_messages"
-        app:layout_anchorGravity="right|end|bottom" />
+    </FrameLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

@@ -3,6 +3,8 @@ package com.weverson.speedchat.presentation.messages;
 import com.weverson.speedchat.domain.channel.Channel;
 import com.weverson.speedchat.domain.message.Message;
 import com.weverson.speedchat.domain.message.interactor.ListMessageUseCase;
+import com.weverson.speedchat.domain.user.User;
+import com.weverson.speedchat.domain.user.interactor.CurrentUserUseCase;
 
 import java.util.List;
 
@@ -16,10 +18,14 @@ public class MessagesPresenter implements MessagesContract.Presenter {
 
     private ListMessageUseCase mListMessageUseCase;
 
+    private CurrentUserUseCase mCurrentUserUseCase;
+
     @Inject
-    public MessagesPresenter(MessagesContract.View messagesView, ListMessageUseCase listMessageUseCase){
+    public MessagesPresenter(MessagesContract.View messagesView, ListMessageUseCase listMessageUseCase,
+                             CurrentUserUseCase currentUserUseCase){
         mMessagesView = messagesView;
         mListMessageUseCase = listMessageUseCase;
+        mCurrentUserUseCase = currentUserUseCase;
     }
 
     @Inject
@@ -34,11 +40,20 @@ public class MessagesPresenter implements MessagesContract.Presenter {
 
     @Override
     public void listMessages(Channel channel) {
-        mListMessageUseCase.execute(new ListMessageUseCase.Request(channel))
-                .subscribe(new ListMessageSubscriber());
+        mCurrentUserUseCase.execute(new CurrentUserUseCase.Request()).subscribe(currentUser -> {
+            mListMessageUseCase.execute(new ListMessageUseCase.Request(channel))
+                    .subscribe(new ListMessageSubscriber((User) currentUser));
+        });
+
     }
 
     public final class ListMessageSubscriber extends Subscriber<List<Message>> {
+
+        private User mUser;
+
+        public ListMessageSubscriber(User user){
+            mUser = user;
+        }
 
         @Override
         public void onCompleted() {
@@ -52,7 +67,7 @@ public class MessagesPresenter implements MessagesContract.Presenter {
 
         @Override
         public void onNext(List<Message> messages) {
-            mMessagesView.displayMessage(messages);
+            mMessagesView.displayMessage(messages, mUser);
         }
     }
 }
